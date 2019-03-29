@@ -3,4 +3,7 @@
 import argparse
 import mysql.connector
 
-# Stuff
+# Replace with relevant information
+ mysql.connector.connect(host='localhost',database='l',user='',password='')
+ 
+ 
