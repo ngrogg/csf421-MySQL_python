@@ -13,7 +13,8 @@ fileName = args.textfile
 Table    = args.table
 
 # MySQL connection information
-#mysql.connector.connect(host='localhost',database='l',user='',password='')
+cnx = mysql.connector.connect(user='',password='',database='CS421',host='localhost')
+cur = cnx.cursor()
 
 f = open(fileName)
 line = f.readline()
@@ -30,9 +31,9 @@ if Table == 'C':
         print(e)
         print(f)
         print(g)
-        #MySQL stuff goes here
+        # MySQL code to insert the value into the Database
         line = f.readline()
-    f.close()
+    f.close(_fetch_row)
 
 # If table flag is B for brand table
 elif Table == 'B':
@@ -43,6 +44,10 @@ elif Table == 'B':
         print(b)
         print(c)
         # MySQL stuff goes here
+        insert = ("""INSERT INTO brand(make,brand_worth,public) VALUES(%s,%s,%s)""")
+        data_value = (a,b,c)
+        cur.execute(insert,data_value)
+        cnx.commit()
         line = f.readline()
     f.close()
 
@@ -143,10 +148,15 @@ elif Table == 'JP':
         print(h)
         print(i)
         #MySQL stuff goes here
+        #cur.execute()
+        #con.commit()
         line = f.readline()
     f.close()
 
 # Fail state for invalid options
 else:
     print "Invalid parameter"
+
 # Close MySQL connection
+cur.close()
+cnx.close()
