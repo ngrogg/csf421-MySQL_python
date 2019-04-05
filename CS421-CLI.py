@@ -16,11 +16,43 @@ Table    = args.table
 cnx = mysql.connector.connect(user='',password='',database='CS421',host='localhost')
 cur = cnx.cursor()
 
-f = open(fileName)
-line = f.readline()
+ff = open(fileName)
+line = ff.readline()
+
+# If table flag is B for brand table
+if Table == 'B':
+    while line:
+        line.split()
+        a,b,c=line.split()
+        print(a)
+        print(b)
+        print(c)
+        insert = ("""INSERT INTO brand(make,brand_worth,public) VALUES(%s,%s,%s)""")
+        data_value = (a,b,c)
+        cur.execute(insert,data_value)
+        cnx.commit()
+        line = ff.readline()
+    ff.close()
+
+# If table flag is BT for Body Type table
+elif Table == 'BT':
+    while line:
+        line.split()
+        a,b,c,d,e=line.split()
+        print(a)
+        print(b)
+        print(c)
+        print(d)
+        print(e)
+        insert = ("""INSERT INTO body_type(platform_code,construction,shape,drive,suspension) VALUES(%s,%s,%s,%s,%s)""")
+        data_value = (a,b,c,d,e)
+        cur.execute(insert,data_value)
+        cnx.commit()
+        line = ff.readline()
+    ff.close()
 
 # If table flag is C for car table
-if Table == 'C':
+elif Table == 'C':
     while line:
         line.split()
         a,b,c,d,e,f,g=line.split()
@@ -31,25 +63,30 @@ if Table == 'C':
         print(e)
         print(f)
         print(g)
-        # MySQL code to insert the value into the Database
-        line = f.readline()
-    f.close(_fetch_row)
+        insert = ("""INSERT INTO car(model,make,price,platform_code,drive,aggregate_review,autonomous) VALUES(%s,%s,%s,%s,%s,%s,%s)""")
+        data_value = (a,b,c,d,e,f,g)
+        cur.execute(insert,data_value)
+        cnx.commit()
+        line = ff.readline()
+    ff.close()
 
-# If table flag is B for brand table
-elif Table == 'B':
+
+# If table flag is CO for Cost of Ownership table
+elif Table == 'CO':
     while line:
         line.split()
-        a,b,c=line.split()
+        a,b,c,d,e=line.split()
         print(a)
         print(b)
         print(c)
-        # MySQL stuff goes here
-        insert = ("""INSERT INTO brand(make,brand_worth,public) VALUES(%s,%s,%s)""")
-        data_value = (a,b,c)
+        print(d)
+        print(e)
+        insert = ("""INSERT INTO costofownership(model,make,maintenance,depreciation,recalls) VALUES(%s,%s,%s,%s,%s)""")
+        data_value = (a,b,c,d,e)
         cur.execute(insert,data_value)
         cnx.commit()
-        line = f.readline()
-    f.close()
+        line = ff.readline()
+    ff.close()
 
 # If table flag is E for Engine table
 elif Table == 'E':
@@ -63,75 +100,12 @@ elif Table == 'E':
         print(e)
         print(f)
         print(g)
-        #MySQL stuff goes here
-        line = f.readline()
-    f.close()
-
-# If table flag is BT for Body Type table
-elif Table == 'BT':
-    while line:
-        line.split()
-        a,b,c,d,e=line.split()
-        print(a)
-        print(b)
-        print(c)
-        print(d)
-        print(e)
-        #MySQL stuff goes here
-        line = f.readline()
-    f.close()
-
-# If table flag is T for Tech table
-elif Table == 'T':
-    while line:
-        line.split()
-        a,b,c,d,e,f=line.split()
-        print(a)
-        print(b)
-        print(c)
-        print(d)
-        print(e)
-        print(f)
-        #MySQL stuff goes here
-        line = f.readline()
-    f.close()
-
-# If table flag is R for Review table
-elif Table == 'R':
-    while line:
-        line.split()
-        a,b,c=line.split()
-        print(a)
-        print(b)
-        print(c)
-        #MySQL stuff goes here
-        line = f.readline()
-    f.close()
-
-# If table flag is CO for Cost of Ownership table
-elif Table == 'CO':
-    while line:
-        line.split()
-        a,b,c,d,e=line.split()
-        print(a)
-        print(b)
-        print(c)
-        print(d)
-        print(e)
-        #MySQL stuff goes here
-        line = f.readline()
-    f.close()
-
-# If table flag is UE for Uses Engine table
-elif Table == 'UE':
-    while line:
-        line.split()
-        a,b=line.split()
-        print(a)
-        print(b)
-        #MySQL stuff goes here
-        line = f.readline()
-    f.close()
+        insert = ("""INSERT INTO engine(engine_code,cylinder_count,engine_type,hp,torque,fuel_type,induction) VALUES(%s,%s,%s,%s,%s,%s,%s)""")
+        data_value = (a,b,c,d,e,f,g)
+        cur.execute(insert,data_value)
+        cnx.commit()
+        line = ff.readline()
+    ff.close()
 
 # If table flag is JP for Joint Project table
 elif Table == 'JP':
@@ -147,11 +121,60 @@ elif Table == 'JP':
         print(g)
         print(h)
         print(i)
-        #MySQL stuff goes here
-        #cur.execute()
-        #con.commit()
-        line = f.readline()
-    f.close()
+        insert = ("""INSERT INTO jointproject(model,make1,make2,engine_code,platform_code,critic_score,customer_score,average_score,autonomous) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s)""")
+        data_value = (a,b,c,d,e,f,g,h,i)
+        cur.execute(insert,data_value)
+        cnx.commit()
+        line = ff.readline()
+    ff.close()
+
+# If table flag is R for Review table
+elif Table == 'R':
+    while line:
+        line.split()
+        a,b,c=line.split()
+        print(a)
+        print(b)
+        print(c)
+        insert = ("""INSERT INTO review(model,critic_score,customer_score) VALUES(%s,%s,%s)""")
+        data_value = (a,b,c)
+        cur.execute(insert,data_value)
+        cnx.commit()
+        line = ff.readline()
+    ff.close()
+
+# If table flag is T for Tech table
+elif Table == 'T':
+    while line:
+        line.split()
+        a,b,c,d,e,f=line.split()
+        print(a)
+        print(b)
+        print(c)
+        print(d)
+        print(e)
+        print(f)
+        insert = ("""INSERT INTO tech(model,infotainment,proximity_sensor,auto_braking,adc,autonomous) VALUES(%s,%s,%s,%s,%s,%s)""")
+        data_value = (a,b,c,d,e,f)
+        cur.execute(insert,data_value)
+        cnx.commit()
+        line = ff.readline()
+    ff.close()
+
+
+# If table flag is UE for Uses Engine table
+elif Table == 'UE':
+    while line:
+        line.split()
+        a,b=line.split()
+        print(a)
+        print(b)
+        insert = ("""INSERT INTO usesengine(engine_code,model) VALUES(%s,%s)""")
+        data_value = (a,b)
+        cur.execute(insert,data_value)
+        cnx.commit()
+        line = ff.readline()
+    ff.close()
 
 # Fail state for invalid options
 else:
