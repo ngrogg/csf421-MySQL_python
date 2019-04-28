@@ -22,6 +22,33 @@ class Application(Frame):
     ### REMOVAL FUNCTIONS ###
     #########################
     
+    def BODYTYPE_REMOVAL(self):
+        print"test"
+
+    def BRAND_REMOVAL(self):
+        print"test"
+  
+    def CAR_REMOVAL(self):
+        print"test"
+  
+    def COSTOFOWNERSHIP_REMOVAL(self): 
+        print"test"
+ 
+    def ENGINE_REMOVAL(self):
+        print"test"
+
+    def JOINTPROJECT_REMOVAL(self):
+        print"test"
+
+    def REVIEW_REMOVAL(self):
+        print"test"
+
+    def TECH_REMOVAL(self):
+        print"test"
+
+    def USESENGINE_REMOVAL(self):
+        print"test"
+    
     ######################
     ## EXPORT TABLE FUNCTIONS ##
     ######################
@@ -155,6 +182,16 @@ class Application(Frame):
     def back_removal(self):
         # Remove created buttons and title
         self.buttonc.pack_forget()
+        self.buttonc.pack_forget()
+        self.buttonc1.pack_forget()
+        self.buttonc2.pack_forget()
+        self.buttonc3.pack_forget()
+        self.buttonc4.pack_forget()
+        self.buttonc5.pack_forget()
+        self.buttonc6.pack_forget()
+        self.buttonc7.pack_forget()
+        self.buttonc8.pack_forget()
+        self.buttonc9.pack_forget()
         self.TITLEC.pack_forget()
 
         # Create Home buttons
@@ -254,7 +291,62 @@ class Application(Frame):
         self.buttonc["text"] = "Back"
         self.buttonc["command"] = self.back_removal
         self.buttonc.pack({"side" : "left"})
+        
+        # Tables to delete from
 
+        # Body_Type
+        self.buttonc1 = Button(self)
+        self.buttonc1["text"] = "Body Type"
+        self.buttonc1["command"] = self.BODYTYPE_REMOVAL
+        self.buttonc1.pack({"side" : "left"})
+        
+        # Brand
+        self.buttonc2 = Button(self)
+        self.buttonc2["text"] = "Brand Type"
+        self.buttonc2["command"] = self.BRAND_REMOVAL
+        self.buttonc2.pack({"side" : "left"})
+
+        # Car
+        self.buttonc3 = Button(self)
+        self.buttonc3["text"] = "Car"
+        self.buttonc3["command"] = self.CAR_REMOVAL
+        self.buttonc3.pack({"side" : "left"})
+       
+        # Cost Of Ownership
+        self.buttonc4 = Button(self)
+        self.buttonc4["text"] = "Cost of Ownership"
+        self.buttonc4["command"] = self.COSTOFOWNERSHIP_REMOVAL
+        self.buttonc4.pack({"side" : "left"})
+      
+        # Engine
+        self.buttonc5 = Button(self)
+        self.buttonc5["text"] = "Engine"
+        self.buttonc5["command"] = self.ENGINE_REMOVAL
+        self.buttonc5.pack({"side" : "left"})
+     
+        # Joint Project
+        self.buttonc6 = Button(self)
+        self.buttonc6["text"] = "Joint Project"
+        self.buttonc6["command"] = self.JOINTPROJECT_REMOVAL
+        self.buttonc6.pack({"side" : "left"})
+       
+        # Review
+        self.buttonc7 = Button(self)
+        self.buttonc7["text"] = "Review"
+        self.buttonc7["command"] = self.REVIEW_REMOVAL
+        self.buttonc7.pack({"side" : "left"})
+       
+        # Tech
+        self.buttonc8 = Button(self)
+        self.buttonc8["text"] = "Tech"
+        self.buttonc8["command"] = self.TECH_REMOVAL
+        self.buttonc8.pack({"side" : "left"})
+       
+        # Uses Engine
+        self.buttonc9 = Button(self)
+        self.buttonc9["text"] = "Uses Engine"
+        self.buttonc9["command"] = self.USESENGINE_REMOVAL
+        self.buttonc9.pack({"side" : "left"})
 
     # Button to export table
     def exportTable(self):
