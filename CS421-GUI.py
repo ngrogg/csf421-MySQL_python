@@ -15,8 +15,16 @@ class Application(Frame):
     ######################
 
     # Export bodytype
-    #def BODYTYPE(self):
-    
+    def BODYTYPE(self):
+         # Open MySQL connection
+        self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
+        self.cur = self.cnx.cursor()
+        self.command=("""SELECT * FROM body_type INTO OUTFILE '/home/oddone9139/ProjectExports/bodytype.csv';""")
+        self.cur.execute(self.command)
+        self.cnx.commit()
+        self.cur.close()
+        self.cnx.close()
+   
     # Export brand
     def BRAND(self):
         # Open MySQL connection
@@ -29,25 +37,81 @@ class Application(Frame):
         self.cnx.close()
 
     # Export car
-    #def CAR(self):
+    def CAR(self):
+        # Open MySQL connection
+        self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
+        self.cur = self.cnx.cursor()
+        self.command=("""SELECT * FROM car INTO OUTFILE '/home/oddone9139/ProjectExports/car.csv';""")
+        self.cur.execute(self.command)
+        self.cnx.commit()
+        self.cur.close()
+        self.cnx.close()
 
     # Export costofownership
-    #def COSTOFOWNERSHIP(self):
+    def COSTOFOWNERSHIP(self):
+        # Open MySQL connection
+        self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
+        self.cur = self.cnx.cursor()
+        self.command=("""SELECT * FROM costofownership INTO OUTFILE '/home/oddone9139/ProjectExports/cow.csv';""")
+        self.cur.execute(self.command)
+        self.cnx.commit()
+        self.cur.close()
+        self.cnx.close()
 
     # Export engine
-    #def ENGINE(self):
+    def ENGINE(self):
+        # Open MySQL connection
+        self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
+        self.cur = self.cnx.cursor()
+        self.command=("""SELECT * FROM engine INTO OUTFILE '/home/oddone9139/ProjectExports/engine.csv';""")
+        self.cur.execute(self.command)
+        self.cnx.commit()
+        self.cur.close()
+        self.cnx.close()
 
     # Export jointproject
-    #def JOINTPROJECT(self):
+    def JOINTPROJECT(self):
+        # Open MySQL connection
+        self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
+        self.cur = self.cnx.cursor()
+        self.command=("""SELECT * FROM jointproject INTO OUTFILE '/home/oddone9139/ProjectExports/jointproject.csv';""")
+        self.cur.execute(self.command)
+        self.cnx.commit()
+        self.cur.close()
+        self.cnx.close()
 
     # Export review
-    #def REVIEW(self):
-    
+    def REVIEW(self):
+         # Open MySQL connection
+        self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
+        self.cur = self.cnx.cursor()
+        self.command=("""SELECT * FROM review INTO OUTFILE '/home/oddone9139/ProjectExports/review.csv';""")
+        self.cur.execute(self.command)
+        self.cnx.commit()
+        self.cur.close()
+        self.cnx.close()
+   
     # Export tech
-    #def TECH(self):
-    
+    def TECH(self):
+         # Open MySQL connection
+        self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
+        self.cur = self.cnx.cursor()
+        self.command=("""SELECT * FROM tech INTO OUTFILE '/home/oddone9139/ProjectExports/tech.csv';""")
+        self.cur.execute(self.command)
+        self.cnx.commit()
+        self.cur.close()
+        self.cnx.close()
+   
     # Export usesengine
-    #def USESENGINE(self):
+    def USESENGINE(self):
+        # Open MySQL connection
+        self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
+        self.cur = self.cnx.cursor()
+        self.command=("""SELECT * FROM usesengine INTO OUTFILE '/home/oddone9139/ProjectExports/usesengine.csv';""")
+        self.cur.execute(self.command)
+        self.cnx.commit()
+        self.cur.close()
+        self.cnx.close()
 
     #########################
     ### GO BACK FUNCTIONS ###
@@ -85,8 +149,16 @@ class Application(Frame):
         # Remove created buttons and title
         self.buttond.pack_forget()
         self.TITLED.pack_forget()
-#        self.buttond2.pack_forget()
+        self.buttond1.pack_forget()
         self.buttond2.pack_forget()
+        self.buttond3.pack_forget()
+        self.buttond4.pack_forget()
+        self.buttond5.pack_forget()
+        self.buttond6.pack_forget()
+        self.buttond7.pack_forget()
+        self.buttond8.pack_forget()
+        self.buttond9.pack_forget()
+
         # Create Home buttons
         self.createWidgets()
 
@@ -188,10 +260,10 @@ class Application(Frame):
         # Buttons for table export
 
         # Export bodytype button
-#        self.buttond1 = Button(self)
-#        self.buttond1["text"] = "Back"
-#        self.buttond1["command"] = self.BODYTYPE
-#        self.buttond1.pack({"side":"left"})
+        self.buttond1 = Button(self)
+        self.buttond1["text"] = "Body Type"
+        self.buttond1["command"] = self.BODYTYPE
+        self.buttond1.pack({"side":"left"})
 
         # Export brand
         self.buttond2 = Button(self)
