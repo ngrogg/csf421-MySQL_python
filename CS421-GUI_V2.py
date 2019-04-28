@@ -236,8 +236,8 @@ class QueryPage(tk.Frame):
 	        self.Entry4.configure(font="TkFixedFont")
 	    # Optional check box for WHERE clause
 	        #self.RadioWHERE = tk.Radiobutton(self)
-	        self.CheckVar1 = IntVar()
-	        self.RadioWHERE = tk.Checkbutton(self, variable = CheckVar1, onvalue = 1, offvalue = 0)
+	        self.CheckVar1 = tk.IntVar()
+	        self.RadioWHERE = tk.Checkbutton(self, variable = self.CheckVar1, onvalue = 1, offvalue = 0)
 	        self.RadioWHERE.place(relx=0.017, rely=0.311, relheight=0.044
                 , relwidth=0.132)
 	        self.RadioWHERE.configure(activebackground="#f9f9f9")
@@ -345,8 +345,8 @@ class QEPage(tk.Frame):
 	        self.Entry4.configure(background="white")
 	        self.Entry4.configure(font="TkFixedFont")
 	    # Option checkbox for WHERE clause
-	        self.CheckVar2 = IntVar()
-	        self.RadioWHERE = tk.Checkbutton(self, variable = CheckVar2, onvalue = 1, offvalue = 0)
+	        self.CheckVar2 = tk.IntVar()
+	        self.RadioWHERE = tk.Checkbutton(self, variable = self.CheckVar2, onvalue = 1, offvalue = 0)
 	        self.RadioWHERE.place(relx=0.017, rely=0.311, relheight=0.044
                 , relwidth=0.132)
 	        self.RadioWHERE.configure(activebackground="#f9f9f9")
