@@ -10,14 +10,26 @@ class Application(Frame):
     ### MAIN FUNCTIONS ###
     ######################
     
+    #######################
+    ### QUERY FUNCTIONS ###
+    #######################
+    
+    ########################
+    ### INSERT FUNCTIONS ###
+    ########################
+    
+    #########################
+    ### REMOVAL FUNCTIONS ###
+    #########################
+    
     ######################
-    ## EXPORT FUNCTIONS ##
+    ## EXPORT TABLE FUNCTIONS ##
     ######################
 
     # Export bodytype
     def BODYTYPE(self):
          # Open MySQL connection
-        self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
+        self.cnx = mysql.connector.connect(user='', password='', database='CS421',host='localhost')
         self.cur = self.cnx.cursor()
         self.command=("""SELECT * FROM body_type INTO OUTFILE '/home/oddone9139/ProjectExports/bodytype.csv';""")
         self.cur.execute(self.command)
@@ -112,6 +124,10 @@ class Application(Frame):
         self.cnx.commit()
         self.cur.close()
         self.cnx.close()
+        
+    ##############################
+    ### EXPORT QUERY FUNCTIONS ###
+    ##############################
 
     #########################
     ### GO BACK FUNCTIONS ###
@@ -172,7 +188,7 @@ class Application(Frame):
         self.createWidgets()
 
     ######################
-    ### MAIN FUNCTIONS ###
+    ### HOME FUNCTIONS ###
     ######################
 
     # Button to run query
