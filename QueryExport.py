@@ -82,7 +82,11 @@ class QueryExport:
         self.Label3.place(relx=0.183, rely=0.311, height=18, width=46)
         self.Label3.configure(activebackground="#f9f9f9")
         self.Label3.configure(text='''WHERE''')
-
+ # Back Button       
+        self.BackButton = tk.Button(top)
+        self.BackButton.place(relx=0.0, rely=0.0, height=28, width=57)
+        self.BackButton.configure(text='''Back''')
+ 
 # Select input box
         self.Entry1 = tk.Entry(top)
         self.Entry1.place(relx=0.317, rely=0.089,height=20, relwidth=0.243)
