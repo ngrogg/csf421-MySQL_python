@@ -171,6 +171,10 @@ class Application(Frame):
         # Create Home buttons
         self.createWidgets()
 
+    ######################
+    ### MAIN FUNCTIONS ###
+    ######################
+
     # Button to run query
     def query(self):
        # Insert title text
