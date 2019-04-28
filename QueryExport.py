@@ -83,31 +83,38 @@ class QueryExport:
         self.Label3.configure(activebackground="#f9f9f9")
         self.Label3.configure(text='''WHERE''')
 
+# Select input box
         self.Entry1 = tk.Entry(top)
         self.Entry1.place(relx=0.317, rely=0.089,height=20, relwidth=0.243)
         self.Entry1.configure(background="white")
         self.Entry1.configure(font="TkFixedFont")
         self.Entry1.configure(selectbackground="#c4c4c4")
-
+# FROM input box
         self.Entry2 = tk.Entry(top)
         self.Entry2.place(relx=0.317, rely=0.2,height=20, relwidth=0.243)
         self.Entry2.configure(background="white")
         self.Entry2.configure(font="TkFixedFont")
         self.Entry2.configure(selectbackground="#c4c4c4")
-
+#WHERE STATEMENT
+    # WHERE input box1
         self.Entry3 = tk.Entry(top)
         self.Entry3.place(relx=0.317, rely=0.311,height=20, relwidth=0.243)
         self.Entry3.configure(background="white")
         self.Entry3.configure(font="TkFixedFont")
         self.Entry3.configure(selectbackground="#c4c4c4")
-
+    # WHERE Input box2
+        self.Entry4 = tk.Entry(top)
+        self.Entry4.place(relx=0.633, rely=0.311,height=20, relwidth=0.243)
+        self.Entry4.configure(background="white")
+        self.Entry4.configure(font="TkFixedFont")
+    # Radio button for WHERE
         self.RadioWHERE = tk.Radiobutton(top)
         self.RadioWHERE.place(relx=0.017, rely=0.311, relheight=0.044
                 , relwidth=0.132)
         self.RadioWHERE.configure(activebackground="#f9f9f9")
         self.RadioWHERE.configure(justify='left')
         self.RadioWHERE.configure(text='''WHERE?''')
-
+    # Drop down menu for WHERE statement logicals
         self.TCombobox1 = ttk.Combobox(top)
         self.TCombobox1.place(relx=0.567, rely=0.311, relheight=0.04
                 , relwidth=0.062)
@@ -115,7 +122,7 @@ class QueryExport:
         self.TCombobox1.configure(values=self.value_list)
         self.TCombobox1.configure(textvariable=QueryExport_support.combobox)
         self.TCombobox1.configure(takefocus="")
-
+# Query OutPut box
         self.Scrolledtext1 = ScrolledText(top)
         self.Scrolledtext1.place(relx=0.0, rely=0.667, relheight=0.262
                 , relwidth=0.98)
@@ -125,20 +132,15 @@ class QueryExport:
         self.Scrolledtext1.configure(selectbackground="#c4c4c4")
         self.Scrolledtext1.configure(width=10)
         self.Scrolledtext1.configure(wrap="none")
-
+# Export button
         self.ExportQuery = tk.Button(top)
         self.ExportQuery.place(relx=0.35, rely=0.933, height=28, width=149)
         self.ExportQuery.configure(activebackground="#f9f9f9")
         self.ExportQuery.configure(text='''Export''')
-
+# Run Query button
         self.Button1 = tk.Button(top)
         self.Button1.place(relx=0.017, rely=0.578, height=28, width=92)
         self.Button1.configure(text='''Run Query''')
-
-        self.Entry4 = tk.Entry(top)
-        self.Entry4.place(relx=0.633, rely=0.311,height=20, relwidth=0.243)
-        self.Entry4.configure(background="white")
-        self.Entry4.configure(font="TkFixedFont")
 
 # The following code is added to facilitate the Scrolled widgets you specified.
 class AutoScroll(object):
