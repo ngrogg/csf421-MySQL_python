@@ -233,7 +233,8 @@ class QueryPage(tk.Frame):
 	        self.Entry4.configure(background="white")
 	        self.Entry4.configure(font="TkFixedFont")
 	    # Radio button for WHERE
-	        self.RadioWHERE = tk.Radiobutton(self)
+	        #self.RadioWHERE = tk.Radiobutton(self)
+	        self.RadioWHERE = tk.Checkbutton(self)
 	        self.RadioWHERE.place(relx=0.017, rely=0.311, relheight=0.044
                 , relwidth=0.132)
 	        self.RadioWHERE.configure(activebackground="#f9f9f9")
@@ -341,7 +342,8 @@ class QEPage(tk.Frame):
 	        self.Entry4.configure(background="white")
 	        self.Entry4.configure(font="TkFixedFont")
 	    # Radio button for WHERE
-	        self.RadioWHERE = tk.Radiobutton(self)
+	        #self.RadioWHERE = tk.Radiobutton(self)
+	        self.RadioWHERE = tk.Checkbutton(self)
 	        self.RadioWHERE.place(relx=0.017, rely=0.311, relheight=0.044
                 , relwidth=0.132)
 	        self.RadioWHERE.configure(activebackground="#f9f9f9")
