@@ -3,7 +3,6 @@
 import mysql.connector
 import tkMessageBox
 from Tkinter import *
-# Fuck it, import everything!
 
 class Application(Frame):
 
@@ -11,6 +10,7 @@ class Application(Frame):
     def back_query(self):
         # Remove created buttons
         self.buttona.pack_forget()
+        self.TITLEA.pack_forget()
 
         # Create Home buttons
         self.createWidgets()
@@ -19,6 +19,7 @@ class Application(Frame):
     def back_insertion(self):
         # Remove created buttons
         self.buttonb.pack_forget()
+        self.TITLEB.pack_forget()
        
         # Create Home buttons
         self.createWidgets()
@@ -27,6 +28,7 @@ class Application(Frame):
     def back_removal(self):
         # Remove created buttons
         self.buttonc.pack_forget()
+        self.TITLEC.pack_forget()
 
         # Create Home buttons
         self.createWidgets()
@@ -35,7 +37,7 @@ class Application(Frame):
     def back_exportTable(self):
         # Remove created buttons
         self.buttond.pack_forget()
-
+        self.TITLED.pack_forget()
         # Create Home buttons
         self.createWidgets()
 
@@ -43,6 +45,7 @@ class Application(Frame):
     def back_exportQuery(self):
         # Remove created buttons
         self.buttone.pack_forget()
+        self.TITLEE.pack_forget()
 
         # Create Home buttons
         self.createWidgets()
@@ -50,6 +53,9 @@ class Application(Frame):
     # Button to run query
     def query(self):
        # Insert title text
+        self.TITLE.pack_forget()
+        self.TITLEA= Label(self, text="Enter query to run")
+        self.TITLEA.pack()
 
         # Remove other buttons
         self.INSERTION.pack_forget()
@@ -69,6 +75,9 @@ class Application(Frame):
     # Button to insert data
     def insertion(self):
         # Insert title text
+        self.TITLE.pack_forget() 
+        self.TITLEB= Label(self, text="Fill form to insert")
+        self.TITLEB.pack()
 
         # Remove other buttons
         self.INSERTION.pack_forget()
@@ -87,6 +96,9 @@ class Application(Frame):
     # Button to remove data
     def removal(self):
         # Insert title text
+        self.TITLE.pack_forget() 
+        self.TITLEC= Label(self, text="Enter values to export")
+        self.TITLEC.pack()
 
         # Remove Home buttons
         self.INSERTION.pack_forget()
@@ -106,6 +118,9 @@ class Application(Frame):
     # Button to export table
     def exportTable(self):
         # Insert title text
+        self.TITLE.pack_forget() 
+        self.TITLED= Label(self, text="Select table export")
+        self.TITLED.pack()
 
         # Remove Home buttons
         self.INSERTION.pack_forget()
@@ -123,7 +138,10 @@ class Application(Frame):
 
     # Button to export query
     def exportQuery(self):
-        # Insert title text
+        # Delete old title text and Insert title text
+        self.TITLE.pack_forget() 
+        self.TITLEE= Label(self, text="Enter query to run and export")
+        self.TITLEE.pack()
 
         # Remove Home buttons
         self.INSERTION.pack_forget()
@@ -141,6 +159,10 @@ class Application(Frame):
 
     # Home page 
     def createWidgets(self):
+        # Title
+        self.TITLE = Label(self, text="Car Database")
+        self.TITLE.pack()
+
         # Button Parameters
         self.QUIT = Button(self)
         self.QUIT["text"] = "QUIT"
