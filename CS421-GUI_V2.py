@@ -178,6 +178,8 @@ class StartPage(tk.Frame):
 #QueryPage#
 ###########
 class QueryPage(tk.Frame):
+        #def QUERY(self):
+        #
          def __init__(self,parent,controller):
 		tk.Frame.__init__(self,parent)
 		_bgcolor = '#d9d9d9'  # X11 color: 'gray85'
@@ -232,9 +234,10 @@ class QueryPage(tk.Frame):
 	        self.Entry4.place(relx=0.633, rely=0.311,height=20, relwidth=0.243)
 	        self.Entry4.configure(background="white")
 	        self.Entry4.configure(font="TkFixedFont")
-	    # Radio button for WHERE
+	    # Optional check box for WHERE clause
 	        #self.RadioWHERE = tk.Radiobutton(self)
-	        self.RadioWHERE = tk.Checkbutton(self)
+	        self.CheckVar1 = IntVar()
+	        self.RadioWHERE = tk.Checkbutton(self, variable = CheckVar1, onvalue = 1, offvalue = 0)
 	        self.RadioWHERE.place(relx=0.017, rely=0.311, relheight=0.044
                 , relwidth=0.132)
 	        self.RadioWHERE.configure(activebackground="#f9f9f9")
@@ -261,7 +264,7 @@ class QueryPage(tk.Frame):
 	        self.Button1 = tk.Button(self)
 	        self.Button1.place(relx=0.017, rely=0.578, height=28, width=92)
 	        self.Button1.configure(text='''Run Query''')
-		
+		    #self.Button1["command"] = self.QUERY
 
 #############
 #Insert Page#
@@ -341,9 +344,9 @@ class QEPage(tk.Frame):
 	        self.Entry4.place(relx=0.633, rely=0.311,height=20, relwidth=0.243)
 	        self.Entry4.configure(background="white")
 	        self.Entry4.configure(font="TkFixedFont")
-	    # Radio button for WHERE
-	        #self.RadioWHERE = tk.Radiobutton(self)
-	        self.RadioWHERE = tk.Checkbutton(self)
+	    # Option checkbox for WHERE clause
+	        self.CheckVar2 = IntVar()
+	        self.RadioWHERE = tk.Checkbutton(self, variable = CheckVar2, onvalue = 1, offvalue = 0)
 	        self.RadioWHERE.place(relx=0.017, rely=0.311, relheight=0.044
                 , relwidth=0.132)
 	        self.RadioWHERE.configure(activebackground="#f9f9f9")
