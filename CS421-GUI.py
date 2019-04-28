@@ -6,9 +6,56 @@ from Tkinter import *
 
 class Application(Frame):
 
+    ######################
+    ### MAIN FUNCTIONS ###
+    ######################
+    
+    ######################
+    ## EXPORT FUNCTIONS ##
+    ######################
+
+    # Export bodytype
+    #def BODYTYPE(self):
+    
+    # Export brand
+    def BRAND(self):
+        # Open MySQL connection
+        self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
+        self.cur = self.cnx.cursor()
+        self.command=("""SELECT * FROM brand INTO OUTFILE '/home/oddone9139/ProjectExports/brand.csv';""")
+        self.cur.execute(self.command)
+        self.cnx.commit()
+        self.cur.close()
+        self.cnx.close()
+
+    # Export car
+    #def CAR(self):
+
+    # Export costofownership
+    #def COSTOFOWNERSHIP(self):
+
+    # Export engine
+    #def ENGINE(self):
+
+    # Export jointproject
+    #def JOINTPROJECT(self):
+
+    # Export review
+    #def REVIEW(self):
+    
+    # Export tech
+    #def TECH(self):
+    
+    # Export usesengine
+    #def USESENGINE(self):
+
+    #########################
+    ### GO BACK FUNCTIONS ###
+    #########################
+
     # When go back button is hit on query screen
     def back_query(self):
-        # Remove created buttons
+        # Remove created buttons and title
         self.buttona.pack_forget()
         self.TITLEA.pack_forget()
 
@@ -17,7 +64,7 @@ class Application(Frame):
 
     # When go back button is hit on insertion screen
     def back_insertion(self):
-        # Remove created buttons
+        # Remove created buttons and title 
         self.buttonb.pack_forget()
         self.TITLEB.pack_forget()
        
@@ -26,7 +73,7 @@ class Application(Frame):
 
     # When go back button is hit on removal screen
     def back_removal(self):
-        # Remove created buttons
+        # Remove created buttons and title
         self.buttonc.pack_forget()
         self.TITLEC.pack_forget()
 
@@ -35,15 +82,17 @@ class Application(Frame):
 
     # When go back button is hit on export table screen
     def back_exportTable(self):
-        # Remove created buttons
+        # Remove created buttons and title
         self.buttond.pack_forget()
         self.TITLED.pack_forget()
+#        self.buttond2.pack_forget()
+        self.buttond2.pack_forget()
         # Create Home buttons
         self.createWidgets()
 
     # When go back button is hit on export query screen
     def back_exportQuery(self):
-        # Remove created buttons
+        # Remove created buttons and title
         self.buttone.pack_forget()
         self.TITLEE.pack_forget()
 
@@ -136,6 +185,63 @@ class Application(Frame):
         self.buttond["command"] = self.back_exportTable
         self.buttond.pack({"side" : "left"})
 
+        # Buttons for table export
+
+        # Export bodytype button
+#        self.buttond1 = Button(self)
+#        self.buttond1["text"] = "Back"
+#        self.buttond1["command"] = self.BODYTYPE
+#        self.buttond1.pack({"side":"left"})
+
+        # Export brand
+        self.buttond2 = Button(self)
+        self.buttond2["text"] = "Brand"
+        self.buttond2["command"] = self.BRAND
+        self.buttond2.pack({"side":"left"})
+
+        # Export car
+        self.buttond3 = Button(self)
+        self.buttond3["text"] = "Car"
+        self.buttond3["command"] = self.CAR
+        self.buttond3.pack({"side":"left"})
+
+        # Export costofownership
+        self.buttond4 = Button(self)
+        self.buttond4["text"] = "Cost of Ownership"
+        self.buttond4["command"] = self.COSTOFOWNERSHIP
+        self.buttond4.pack({"side":"left"})
+       
+        # Export engine
+        self.buttond5 = Button(self)
+        self.buttond5["text"] = "Engine"
+        self.buttond5["command"] = self.ENGINE
+        self.buttond5.pack({"side":"left"})
+      
+        # Export jointproject
+        self.buttond6 = Button(self)
+        self.buttond6["text"] = "Joint Project"
+        self.buttond6["command"] = self.JOINTPROJECT
+        self.buttond6.pack({"side":"left"})
+     
+        # Export review
+        self.buttond7 = Button(self)
+        self.buttond7["text"] = "Review"
+        self.buttond7["command"] = self.REVIEW
+        self.buttond7.pack({"side":"left"})
+    
+        # Export tech
+        self.buttond8 = Button(self)
+        self.buttond8["text"] = "Tech"
+        self.buttond8["command"] = self.TECH
+        self.buttond8.pack({"side":"left"})
+   
+        # Export usesengine
+        self.buttond9 = Button(self)
+        self.buttond9["text"] = "Uses Engine"
+        self.buttond9["command"] = self.USESENGINE
+        self.buttond9.pack({"side":"left"})
+
+
     # Button to export query
     def exportQuery(self):
         # Delete old title text and Insert title text
@@ -156,6 +262,7 @@ class Application(Frame):
         self.buttone["text"] = "Back"
         self.buttone["command"] = self.back_exportQuery
         self.buttone.pack({"side" : "left"})
+
 
     # Home page 
     def createWidgets(self):
