@@ -41,7 +41,7 @@ class mainapp(tk.Tk):
 	# Export bodytype
     	def BODYTYPE(self):
 		# Open MySQL connection
-		self.cnx = mysql.connector.connect(user='george', password='LabPass123', database='CS421',host='localhost')
+		self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
 		self.command=("""SELECT * FROM body_type INTO OUTFILE '/home/oddone9139/ProjectExports/bodytype.csv';""")			
 		self.cur.execute(self.command)
@@ -52,7 +52,7 @@ class mainapp(tk.Tk):
 	# Export brand
 	def BRAND(self):
 		# Open MySQL connection
-		self.cnx = mysql.connector.connect(user='george', password='LabPass123', database='CS421',host='localhost')
+		self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
 		self.command=("""SELECT * FROM brand INTO OUTFILE '/home/oddone9139/ProjectExports/brand.csv';""")
 		self.cur.execute(self.command)
