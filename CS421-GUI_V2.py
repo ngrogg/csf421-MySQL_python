@@ -178,22 +178,46 @@ class StartPage(tk.Frame):
 #QueryPage#
 ###########
 class QueryPage(tk.Frame):
-        #def QUERY(self):
-        #
-         def __init__(self,parent,controller):
-		tk.Frame.__init__(self,parent)
-		_bgcolor = '#d9d9d9'  # X11 color: 'gray85'
-		_fgcolor = '#000000'  # X11 color: 'black'
-		_compcolor = '#d9d9d9' # X11 color: 'gray85'
-		_ana1color = '#d9d9d9' # X11 color: 'gray85'
-		_ana2color = '#ececec' # Closest X11 color: 'gray92'
-		self.style = ttk.Style()
-		label = tk.Label(self,text="Please fill out the form below to Query the database")
-		label.pack()
+        def QUERY(self):
+            print "Function Called"
+            
+            # Assign entry box values to variables
+            self.VALUE = self.Entry1.get()
+            self.TABLE = self.Entry2.get()
+            self.WHERE = self.Entry3.get()
+            self.WHEREB = self.CheckVar1.get()
+            self.WHEREV = self.TCombobox1.get()
 
-		backbutton = tk.Button(self, text="Back",command = lambda: controller.show_frame(StartPage))
-		backbutton.pack(anchor = "sw", side = "left")
-	#begin Query form code
+            # Output for testing, remove before submission
+            print self.VALUE 
+            print self.TABLE
+            print self.WHERE
+            print self.WHEREB
+            print self.WHEREV
+
+            # Create simple query that doesn't use WHERE clause
+            if self.WHEREB == 0:
+                print "Simple Query"
+
+            # Create complicated query that uses WHERE clause
+            if self.WHEREB == 1:
+                print "Complicated Query"
+
+
+        def __init__(self,parent,controller):
+		    tk.Frame.__init__(self,parent)
+		    _bgcolor = '#d9d9d9'  # X11 color: 'gray85'
+		    _fgcolor = '#000000'  # X11 color: 'black'
+		    _compcolor = '#d9d9d9' # X11 color: 'gray85'
+		    _ana1color = '#d9d9d9' # X11 color: 'gray85'
+		    _ana2color = '#ececec' # Closest X11 color: 'gray92'
+		    self.style = ttk.Style()
+		    label = tk.Label(self,text="Please fill out the form below to Query the database")
+		    label.pack()
+
+		    backbutton = tk.Button(self, text="Back",command = lambda: controller.show_frame(StartPage))
+		    backbutton.pack(anchor = "sw", side = "left")
+	        #begin Query form code
 		
         	self.Label1 = tk.Label(self)
        		self.Label1.place(relx=0.183, rely=0.089, height=28, width=46)
@@ -210,61 +234,52 @@ class QueryPage(tk.Frame):
         	self.Label3.configure(activebackground="#f9f9f9")
         	self.Label3.configure(text='''WHERE''')
 		
-	# Select input box
+        	# Select input box
 	        self.Entry1 = tk.Entry(self)
 	        self.Entry1.place(relx=0.317, rely=0.089,height=20, relwidth=0.243)
 	        self.Entry1.configure(background="white")
 	        self.Entry1.configure(font="TkFixedFont")
 	        self.Entry1.configure(selectbackground="#c4c4c4")
-	# FROM input box
+	        # FROM input box
 	        self.Entry2 = tk.Entry(self)
 	        self.Entry2.place(relx=0.317, rely=0.2,height=20, relwidth=0.243)
 	        self.Entry2.configure(background="white")
 	        self.Entry2.configure(font="TkFixedFont")
 	        self.Entry2.configure(selectbackground="#c4c4c4")
-	#WHERE STATEMENT
-	    # WHERE input box1
+	        #WHERE STATEMENT
+	        # WHERE input box1
 	        self.Entry3 = tk.Entry(self)
 	        self.Entry3.place(relx=0.317, rely=0.311,height=20, relwidth=0.243)
 	        self.Entry3.configure(background="white")
 	        self.Entry3.configure(font="TkFixedFont")
 	        self.Entry3.configure(selectbackground="#c4c4c4")
-	    # WHERE Input box2
+	        # WHERE Input box2
 	        self.Entry4 = tk.Entry(self)
 	        self.Entry4.place(relx=0.633, rely=0.311,height=20, relwidth=0.243)
 	        self.Entry4.configure(background="white")
 	        self.Entry4.configure(font="TkFixedFont")
-	    # Optional check box for WHERE clause
+	        # Check Box for WHERE
 	        #self.RadioWHERE = tk.Radiobutton(self)
-	        self.CheckVar1 = tk.IntVar()
-	        self.RadioWHERE = tk.Checkbutton(self, variable = self.CheckVar1, onvalue = 1, offvalue = 0)
-	        self.RadioWHERE.place(relx=0.017, rely=0.311, relheight=0.044
-                , relwidth=0.132)
+            self.CheckVar1 = tk.IntVar()
+	        self.RadioWHERE = tk.Checkbutton(self,variable = self.CheckVar1, onvalue = 1, offvalue = 0)
+            self.RadioWHERE.place(relx=0.017, rely=0.311, relheight=0.044
+            , relwidth=0.132)
 	        self.RadioWHERE.configure(activebackground="#f9f9f9")
 	        self.RadioWHERE.configure(justify='left')
 	        self.RadioWHERE.configure(text='''WHERE?''')
-	    # Drop down menu for WHERE statement logicals
+	        # Drop down menu for WHERE statement logicals
 	        self.TCombobox1 = ttk.Combobox(self)
 	        self.TCombobox1.place(relx=0.567, rely=0.311, relheight=0.04
-                , relwidth=0.062)
+            , relwidth=0.062)
 	        self.value_list = ['AND','OR','>','<','=','!=']
 	        self.TCombobox1.configure(values=self.value_list)
 	        self.TCombobox1.configure(takefocus="")
-	# Query OutPut box
-	        #self.Scrolledtext1 = tk.scrolledtext.ScrolledText(self)
-	        #self.Scrolledtext1.place(relx=0.0, rely=0.667, relheight=0.262
-                #, relwidth=0.98)
-	        #self.Scrolledtext1.configure(background="white")
-	        #self.Scrolledtext1.configure(font="TkTextFont")
-	        #self.Scrolledtext1.configure(insertborderwidth="3")
-	        #self.Scrolledtext1.configure(selectbackground="#c4c4c4")
-	        #self.Scrolledtext1.configure(width=10)
-	        #self.Scrolledtext1.configure(wrap="none")
-	# Run Query button
+	        # Run Query button
 	        self.Button1 = tk.Button(self)
 	        self.Button1.place(relx=0.017, rely=0.578, height=28, width=92)
 	        self.Button1.configure(text='''Run Query''')
-		    #self.Button1["command"] = self.QUERY
+            self.Button1["command"] = self.QUERY
+		
 
 #############
 #Insert Page#
