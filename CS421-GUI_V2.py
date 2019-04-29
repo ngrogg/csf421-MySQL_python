@@ -517,59 +517,59 @@ class InsertPage(tk.Frame):
 #############		
 #Remove Page#
 #############
-         def DELETE(self):
-            print("Start")
-            
-            # Assign input to variable
-            self.model = self.Entry1.get()
-            self.platform = self.Entry2.get()
-            
-            # Print Variables for testing
-            print self.model
-            print self.platform
+    def DELETE(self):
+        print("Start")
+        
+        # Assign input to variable
+        self.model = self.Entry1.get()
+        self.platform = self.Entry2.get()
+        
+        # Print Variables for testing
+        print self.model
+        print self.platform
 
-            # Create queries to remove items
-            # Connect to MySQL database
-            self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
-	    self.cur = self.cnx.cursor()
+        # Create queries to remove items
+        # Connect to MySQL database
+        self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
+	       self.cur = self.cnx.cursor()
 
-            # Create MySQL commands
+        # Create MySQL commands
 	    # REMOVAL ORDER tech -> cow -> review -> car -> body_type
-            # Remove from Tech table
-            #self.removal1 = ("""DELETE FROM tech WHERE model=%s""")
-            self.removal1 = "DELETE FROM tech WHERE model=%s"
-            #self.data_value1 = (self.model)
-            self.cur.execute(self.removal1,(self.model,))
-            print("Deleted from Tech table")
+        # Remove from Tech table
+        #self.removal1 = ("""DELETE FROM tech WHERE model=%s""")
+        self.removal1 = "DELETE FROM tech WHERE model=%s"
+        #self.data_value1 = (self.model)
+        self.cur.execute(self.removal1,(self.model,))
+        print("Deleted from Tech table")
 
-            # Remove from Cost of Ownership table
-            self.removal2 = "DELETE FROM costofownership WHERE model=%s"
-            self.cur.execute(self.removal2,(self.model,))
-            print("Deleted from Cost of Ownership table")
+        # Remove from Cost of Ownership table
+        self.removal2 = "DELETE FROM costofownership WHERE model=%s"
+        self.cur.execute(self.removal2,(self.model,))
+        print("Deleted from Cost of Ownership table")
 
-            # Remove from Review table
-            self.removal3 = "DELETE FROM review WHERE model=%s"
-            self.cur.execute(self.removal3,(self.model,))
-            print("Deleted from Review table")
+        # Remove from Review table
+        self.removal3 = "DELETE FROM review WHERE model=%s"
+        self.cur.execute(self.removal3,(self.model,))
+        print("Deleted from Review table")
             
-            # Remove from car table
-            self.removal4 = "DELETE FROM car WHERE model=%s"
-            self.cur.execute(self.removal4,(self.model,))
-            print("Deleted from Car table")
+        # Remove from car table
+        self.removal4 = "DELETE FROM car WHERE model=%s"
+        self.cur.execute(self.removal4,(self.model,))
+        print("Deleted from Car table")
             
-            # Remove from Body type table
-            self.removal5 = "DELETE FROM body_type WHERE platform_code=%s"
-            self.cur.execute(self.removal5,(self.model,))
-            print("Deleted from Body Type table")
+        # Remove from Body type table
+        self.removal5 = "DELETE FROM body_type WHERE platform_code=%s"
+        self.cur.execute(self.removal5,(self.model,))
+        print("Deleted from Body Type table")
 
-            # Commit changes and close connection
-            print("Deletion finished")
-            self.cnx.commit()
+        # Commit changes and close connection
+        print("Deletion finished")
+        self.cnx.commit()
 	    self.cur.close()
 	    self.cnx.close()
-            print("Commited!")
+        print("Commited!")
 
-         def __init__(self,parent,controller):
+    def __init__(self,parent,controller):
 		tk.Frame.__init__(self,parent)
 		_bgcolor = '#d9d9d9'  # X11 color: 'gray85'
 		_fgcolor = '#000000'  # X11 color: 'black'
@@ -583,53 +583,39 @@ class InsertPage(tk.Frame):
 		backbutton = tk.Button(self, text="Back",command = lambda: controller.show_frame(StartPage))
 		backbutton.pack(anchor = "sw", side = "left")
 
-                #begin REMOVAL form code
+        #begin REMOVAL form code
 		
-        	self.Label1 = tk.Label(self)
-       		self.Label1.place(relx=0.1, rely=0.089, height=18, width=100)
-        	self.Label1.configure(activebackground="#f9f9f9")
-        	self.Label1.configure(text='''Car Model''')
+        self.Label1 = tk.Label(self)
+       	self.Label1.place(relx=0.1, rely=0.089, height=18, width=100)
+        self.Label1.configure(activebackground="#f9f9f9")
+        self.Label1.configure(text='''Car Model''')
 
-                self.Label2 = tk.Label(self)
-        	self.Label2.place(relx=0.1, rely=0.311, height=18, width=150)
-        	self.Label2.configure(activebackground="#f9f9f9")
-        	self.Label2.configure(text='''Platform Code''')
+        self.Label2 = tk.Label(self)
+        self.Label2.place(relx=0.1, rely=0.311, height=18, width=150)
+        self.Label2.configure(activebackground="#f9f9f9")
+        self.Label2.configure(text='''Platform Code''')
 
-                ### SELECT FROM ###
-                # Select input box
-	        self.Entry1 = tk.Entry(self)
-	        self.Entry1.place(relx=0.350, rely=0.089,height=20, relwidth=0.243)
-	        self.Entry1.configure(background="white")
-	        self.Entry1.configure(font="TkFixedFont")
-	        self.Entry1.configure(selectbackground="#c4c4c4")
+        ### SELECT FROM ###
+        # Select input box
+	    self.Entry1 = tk.Entry(self)
+	    self.Entry1.place(relx=0.350, rely=0.089,height=20, relwidth=0.243)
+	    self.Entry1.configure(background="white")
+	    self.Entry1.configure(font="TkFixedFont")
+	    self.Entry1.configure(selectbackground="#c4c4c4")
 
-	        ###  WHERE STATEMENT ###
-	        # WHERE input box1
-	        self.Entry2 = tk.Entry(self)
-	        self.Entry2.place(relx=0.350, rely=0.311,height=20, relwidth=0.243)
-	        self.Entry2.configure(background="white")
-	        self.Entry2.configure(font="TkFixedFont")
-	        self.Entry2.configure(selectbackground="#c4c4c4")
-
-                # Drop down menu for WHERE statement logicals
-	        #self.TCombobox1 = ttk.Combobox(self)
-	        #self.TCombobox1.place(relx=0.600, rely=0.311, relheight=0.04
-                #, relwidth=0.062)
-	        #self.value_list = ['AND','OR','>','<','=','!=']
-	        #self.TCombobox1.configure(values=self.value_list)
-	        #self.TCombobox1.configure(takefocus="")
-
-	        # WHERE Input box3
-	        #self.Entry4 = tk.Entry(self)
-	        #self.Entry4.place(relx=0.675, rely=0.311,height=20, relwidth=0.243)
-	        #self.Entry4.configure(background="white")
-	        #self.Entry4.configure(font="TkFixedFont")
+	    ###  WHERE STATEMENT ###
+	    # WHERE input box1
+	    self.Entry2 = tk.Entry(self)
+	    self.Entry2.place(relx=0.350, rely=0.311,height=20, relwidth=0.243)
+	    self.Entry2.configure(background="white")
+	    self.Entry2.configure(font="TkFixedFont")
+	    self.Entry2.configure(selectbackground="#c4c4c4")
 	       
-                # Run Deletion Function Button
-	        self.Button1 = tk.Button(self)
-	        self.Button1.place(relx=0.017, rely=0.578, height=28, width=92)
-	        self.Button1.configure(text='''Remove Entry''')
-                self.Button1["command"] = self.DELETE
+        # Run Deletion Function Button
+	    self.Button1 = tk.Button(self)
+	    self.Button1.place(relx=0.017, rely=0.578, height=28, width=92)
+	    self.Button1.configure(text='''Remove Entry''')
+        self.Button1["command"] = self.DELETE
 
 ###################		
 #Export Query Page#
