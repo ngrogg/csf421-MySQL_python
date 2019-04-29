@@ -42,7 +42,7 @@ class mainapp(tk.Tk):
 	# Export bodytype
     	def BODYTYPE(self):
 		# Open MySQL connection
-		self.cnx = mysql.connector.connect(user='george', password='LabPass123', database='CS421',host='localhost')
+		self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
 		self.command=("""SELECT * FROM body_type INTO OUTFILE '/home/oddone9139/ProjectExports/bodytype.csv';""")			
 		print self.command
@@ -199,10 +199,10 @@ class QueryPage(tk.Frame):
             	print self.WHEREB
             	print self.WHEREV
 		#reset text to empty in case this is a subsequent call of QUERY
-		self.Scrolledtext1.delete(1.0,"end")
+		self.Scrolledtext2.delete(1.0,"end")
 	# Assign vairables to mysql statements and execute
 		   # Open MySQL connection
-		self.cnx = mysql.connector.connect(user='george', password='LabPass123', database='CS421',host='localhost')
+		self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
 		# Create simple query that doesn't use WHERE clause
 		if self.WHEREB == 0:
@@ -212,10 +212,10 @@ class QueryPage(tk.Frame):
 			print "Simple Query"
 			#loop that outputs query into text box
 			for row in self.cur.fetchall():
-				self.Scrolledtext1.insert("end", row)
-				self.Scrolledtext1.update_idletasks()
-				self.Scrolledtext1.insert("end", '\n')
-				self.Scrolledtext1.update_idletasks()	
+				self.Scrolledtext2.insert("end", row)
+				self.Scrolledtext2.update_idletasks()
+				self.Scrolledtext2.insert("end", '\n')
+				self.Scrolledtext2.update_idletasks()	
 
 		# Create complicated query that uses WHERE clause
 		if self.WHEREB == 1:
@@ -225,10 +225,10 @@ class QueryPage(tk.Frame):
 			print "Complicated Query"
 			#loop that outputs query into text box
 			for row in self.cur.fetchall():
-				self.Scrolledtext1.insert("end", row)
-				self.Scrolledtext1.update_idletasks()
-				self.Scrolledtext1.insert("end", '\n')
-				self.Scrolledtext1.update_idletasks()
+				self.Scrolledtext2.insert("end", row)
+				self.Scrolledtext2.update_idletasks()
+				self.Scrolledtext2.insert("end", '\n')
+				self.Scrolledtext2.update_idletasks()
 
 
 	def __init__(self,parent,controller):
@@ -677,18 +677,18 @@ class QEPage(tk.Frame):
 	def EXPORT(self):
 		# Assign vairables to mysql statements and execute
 		   # Open MySQL connection
-		self.cnx = mysql.connector.connect(user='george', password='LabPass123', database='CS421',host='localhost')
+		self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
 		# Create simple query that doesn't use WHERE clause
 		if self.WHEREB == 0:
-			self.query1 = ("SELECT {} FROM {} INTO OUTFILE '/home/george/421/ProjectExports/DBoutput.txt';".format(self.VALUE,self.TABLE))
+			self.query1 = ("SELECT {} FROM {} INTO OUTFILE '/home/oddone9139/ProjectExports/QueryExport.csv';".format(self.VALUE,self.TABLE))
 			print self.query1
             		self.cur.execute(self.query1)
 			print "Simple Query"	
 
 		# Create complicated query that uses WHERE clause
 		if self.WHEREB == 1:
-			self.query1 = ("SELECT {} FROM {} WHERE {} {} {} INTO OUTFILE '/home/george/421/ProjectExports/DBoutput.txt';".format(self.VALUE,self.TABLE,self.WHERE,self.WHEREV,self.WHERE2))
+			self.query1 = ("SELECT {} FROM {} WHERE {} {} {} INTO OUTFILE '/home/oddone9139/ProjectExports/QueryExport.csv';".format(self.VALUE,self.TABLE,self.WHERE,self.WHEREV,self.WHERE2))
 			#self.command=("""SELECT * FROM review INTO OUTFILE '/home/oddone9139/ProjectExports/DBoutput.csv';""")
 			self.cur.execute(self.query1)
 			
@@ -715,7 +715,7 @@ class QEPage(tk.Frame):
 		self.Scrolledtext1.delete(1.0,"end")
 	# Assign vairables to mysql statements and execute
 		   # Open MySQL connection
-		self.cnx = mysql.connector.connect(user='george', password='LabPass123', database='CS421',host='localhost')
+		self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
 		# Create simple query that doesn't use WHERE clause
 		if self.WHEREB == 0:
@@ -862,9 +862,9 @@ class TEPage(tk.Frame):
 		Car.pack()
 		CostofOwnership = tk.Button(self, text="Cost of Ownership",command = lambda: controller.COSTOFOWNERSHIP())
 		CostofOwnership.pack()
-		Engine = tk.Button(self, text="Engine",command = lambda: controller.ENGINE)
+		Engine = tk.Button(self, text="Engine",command = lambda: controller.ENGINE())
 		Engine.pack()
-		JointProject = tk.Button(self, text="Join Project",command = lambda: controller.JOINTPROJECT)
+		JointProject = tk.Button(self, text="Joint Project",command = lambda: controller.JOINTPROJECT())
 		JointProject.pack()
 		Review = tk.Button(self, text="Review",command = lambda: controller.REVIEW())
 		Review.pack()
