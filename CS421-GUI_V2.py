@@ -278,8 +278,9 @@ class InsertPage(tk.Frame):
             self.platform = self.platform_entry.get()
             self.drive = self.drive_entry.get()
             self.aggrev = self.aggrev_entry.get()
-            self.worth = self.worth_entry.get()
-            self.public = self.public_entry.get()
+            self.autonomous = self.autonomous_entry.get()
+            #self.worth = self.worth_entry.get()
+            #self.public = self.public_entry.get()
             self.critic = self.critic_entry.get()
             self.customer = self.customer_entry.get()
             self.construction = self.construction_entry.get()
@@ -300,8 +301,9 @@ class InsertPage(tk.Frame):
             print self.platform 
             print self.drive
             print self.aggrev 
-            print self.worth
-            print self.public 
+            print self.autonomous
+            #print self.worth
+            #print self.public 
             print self.critic 
             print self.customer 
             print self.construction 
@@ -316,7 +318,47 @@ class InsertPage(tk.Frame):
             print self.recall
 
             # Assign vairables to mysql statements and execute
+            # Open MySQL connection
+    	    self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
+	        self.cur = self.cnx.cursor()
+	    
+            # Body type query, has to go first due to Foreign key constraint
+            self.query1 = ("""INSERT INTO body_type(platform_code, construction, shape, drive, suspension) VALUES(%s,%s,%s,%s,%s) """)
+            self.data_value1 = (self.platform, self.construction, self.shape, self.drive, self.suspension)
+            self.cur.execute(self.query1,self.data_value1)
+            print("Body Type INSERTED")
 
+            # Car query
+            self.query2 = (""" INSERT INTO car(model,make,price,platform_code,drive,aggregate_review,autonomous) VALUES(%s,%s,%s,%s,%s,%s,%s)""")
+            self.data_value2 = (self.model,self.make,self.price,self.platform,self.drive,self.aggrev,self.autonomous)
+            self.cur.execute(self.query2,self.data_value2)
+            print("Car INSERTED")
+
+            # Review query
+            self.query3 = ("""INSERT INTO review(model,critic_score,customer_score) VALUES(%s,%s,%s)""")
+            self.data_value3 = (self.model,self.critic,self.customer)
+            self.cur.execute(self.query3,self.data_value3)           
+            print("Review INSERTED")
+
+            # Tech query
+            self.query4 = ("""INSERT INTO tech(model,infotainment,proximity_sensor,auto_braking,adc,autonomous) VALUES(%s,%s,%s,%s,%s,%s)""")
+            self.data_value4 = (self.model,self.infotainment,self.proximity,self.autobrake,self.adc,self.autonomous)
+            self.cur.execute(self.query4,self.data_value4)
+            print("Tech INSERTED")
+
+            # Cost of Ownership query
+            self.query5 = ("""INSERT INTO costofownership(model,make,maintenance,depreciation,recalls) VALUES(%s,%s,%s,%s,%s)""")
+            self.data_value5 = (self.model,self.make,self.maintenance,self.dep,self.recall)
+            self.cur.execute(self.query5,self.data_value5)
+            print("Cost of Ownership INSERTED")
+
+            # Commit changes and close connection
+            print("Insertion finished")
+            self.cnx.commit()
+	        self.cur.close()
+	        self.cnx.close()
+            print("Commited!")
+            
 	def __init__(self,parent,controller):
 		tk.Frame.__init__(self,parent)
 		_bgcolor = '#d9d9d9'  # X11 color: 'gray85'
@@ -476,7 +518,9 @@ class InsertPage(tk.Frame):
 #Remove Page#
 #############
 class RemovePage(tk.Frame):
-         def __init__(self,parent,controller):
+        #def REMOVAL
+        
+        def __init__(self,parent,controller):
 		tk.Frame.__init__(self,parent)
 		_bgcolor = '#d9d9d9'  # X11 color: 'gray85'
 		_fgcolor = '#000000'  # X11 color: 'black'
