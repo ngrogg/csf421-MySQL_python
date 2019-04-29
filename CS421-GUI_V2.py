@@ -1,4 +1,5 @@
 import Tkinter as tk
+import ScrolledText as scrolledtext
 import sys
 import ttk
 import tkMessageBox
@@ -41,9 +42,11 @@ class mainapp(tk.Tk):
 	# Export bodytype
     	def BODYTYPE(self):
 		# Open MySQL connection
-		self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
+		self.cnx = mysql.connector.connect(user='george', password='LabPass123', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
 		self.command=("""SELECT * FROM body_type INTO OUTFILE '/home/oddone9139/ProjectExports/bodytype.csv';""")			
+		print self.command
+            	self.cur.execute
 		self.cur.execute(self.command)
 		self.cnx.commit()
 		self.cur.close()
@@ -178,45 +181,69 @@ class StartPage(tk.Frame):
 #QueryPage#
 ###########
 class QueryPage(tk.Frame):
-        def QUERY(self):
-            print "Function Called"
+	def QUERY(self):
+		print "Function Called"
             
-            # Assign entry box values to variables
-            self.VALUE = self.Entry1.get()
-            self.TABLE = self.Entry2.get()
-            self.WHERE = self.Entry3.get()
-            self.WHEREB = self.CheckVar1.get()
-            self.WHEREV = self.TCombobox1.get()
+		# Assign entry box values to variables
+            	self.VALUE = self.Entry1.get()
+            	self.TABLE = self.Entry2.get()
+            	self.WHERE = self.Entry3.get()
+		self.WHERE2 = self.Entry4.get()
+            	self.WHEREB = self.CheckVar1.get()
+            	self.WHEREV = self.TCombobox1.get()
 
-            # Output for testing, remove before submission
-            print self.VALUE 
-            print self.TABLE
-            print self.WHERE
-            print self.WHEREB
-            print self.WHEREV
+            	# Output for testing, remove before submission
+            	print self.VALUE 
+            	print self.TABLE
+            	print self.WHERE
+            	print self.WHEREB
+            	print self.WHEREV
+		#reset text to empty in case this is a subsequent call of QUERY
+		self.Scrolledtext1.delete(1.0,"end")
+	# Assign vairables to mysql statements and execute
+		   # Open MySQL connection
+		self.cnx = mysql.connector.connect(user='george', password='LabPass123', database='CS421',host='localhost')
+		self.cur = self.cnx.cursor()
+		# Create simple query that doesn't use WHERE clause
+		if self.WHEREB == 0:
+			self.query1 = ("SELECT {} FROM {}".format(self.VALUE,self.TABLE))
+			print self.query1
+            		self.cur.execute(self.query1)
+			print "Simple Query"
+			#loop that outputs query into text box
+			for row in self.cur.fetchall():
+				self.Scrolledtext1.insert("end", row)
+				self.Scrolledtext1.update_idletasks()
+				self.Scrolledtext1.insert("end", '\n')
+				self.Scrolledtext1.update_idletasks()	
 
-            # Create simple query that doesn't use WHERE clause
-            if self.WHEREB == 0:
-                print "Simple Query"
+		# Create complicated query that uses WHERE clause
+		if self.WHEREB == 1:
+			self.query1 = ("SELECT {} FROM {} WHERE {} {} {}".format(self.VALUE,self.TABLE,self.WHERE,self.WHEREV,self.WHERE2))
+			print self.query1
+			self.cur.execute(self.query1)
+			print "Complicated Query"
+			#loop that outputs query into text box
+			for row in self.cur.fetchall():
+				self.Scrolledtext1.insert("end", row)
+				self.Scrolledtext1.update_idletasks()
+				self.Scrolledtext1.insert("end", '\n')
+				self.Scrolledtext1.update_idletasks()
 
-            # Create complicated query that uses WHERE clause
-            if self.WHEREB == 1:
-                print "Complicated Query"
 
+	def __init__(self,parent,controller):
+		tk.Frame.__init__(self,parent)
+		_bgcolor = '#d9d9d9'  # X11 color: 'gray85'
+		_fgcolor = '#000000'  # X11 color: 'black'
+		_compcolor = '#d9d9d9' # X11 color: 'gray85'
+		_ana1color = '#d9d9d9' # X11 color: 'gray85'
+		_ana2color = '#ececec' # Closest X11 color: 'gray92'
+		self.style = ttk.Style()
+		label = tk.Label(self,text="Please fill out the form below to Query the database")
+		label.pack()
 
-        def __init__(self,parent,controller):
-		    tk.Frame.__init__(self,parent)
-		    _bgcolor = '#d9d9d9'  # X11 color: 'gray85'
-		    _fgcolor = '#000000'  # X11 color: 'black'
-		    _compcolor = '#d9d9d9' # X11 color: 'gray85'
-		    _ana1color = '#d9d9d9' # X11 color: 'gray85'
-		    _ana2color = '#ececec' # Closest X11 color: 'gray92'
-		    self.style = ttk.Style()
-		    label = tk.Label(self,text="Please fill out the form below to Query the database")
-		    label.pack()
-
-		    backbutton = tk.Button(self, text="Back",command = lambda: controller.show_frame(StartPage))
-		    backbutton.pack(anchor = "sw", side = "left")
+		backbutton = tk.Button(self, text="Back",command = lambda: controller.show_frame(StartPage))
+		backbutton.pack(anchor = "sw", side = "left")
 	        #begin Query form code
 		
         	self.Label1 = tk.Label(self)
@@ -260,10 +287,10 @@ class QueryPage(tk.Frame):
 	        self.Entry4.configure(font="TkFixedFont")
 	        # Check Box for WHERE
 	        #self.RadioWHERE = tk.Radiobutton(self)
-            self.CheckVar1 = tk.IntVar()
+            	self.CheckVar1 = tk.IntVar()
 	        self.RadioWHERE = tk.Checkbutton(self,variable = self.CheckVar1, onvalue = 1, offvalue = 0)
-            self.RadioWHERE.place(relx=0.017, rely=0.311, relheight=0.044
-            , relwidth=0.132)
+            	self.RadioWHERE.place(relx=0.017, rely=0.302, relheight=0.044
+            , relwidth=0.145)
 	        self.RadioWHERE.configure(activebackground="#f9f9f9")
 	        self.RadioWHERE.configure(justify='left')
 	        self.RadioWHERE.configure(text='''WHERE?''')
@@ -274,11 +301,21 @@ class QueryPage(tk.Frame):
 	        self.value_list = ['AND','OR','>','<','=','!=']
 	        self.TCombobox1.configure(values=self.value_list)
 	        self.TCombobox1.configure(takefocus="")
-	        # Run Query button
+		# Query OutPut box
+	        self.Scrolledtext2 = scrolledtext.ScrolledText(self)
+	        self.Scrolledtext2.place(relx=0.0, rely=0.667, relheight=0.262
+                , relwidth=0.98)
+	        self.Scrolledtext2.configure(background="white")
+	        self.Scrolledtext2.configure(font="TkTextFont")
+	        self.Scrolledtext2.configure(insertborderwidth="3")
+	        self.Scrolledtext2.configure(selectbackground="#c4c4c4")
+	        self.Scrolledtext2.configure(width=10)
+	        self.Scrolledtext2.configure(wrap="none")	        
+		# Run Query button
 	        self.Button1 = tk.Button(self)
 	        self.Button1.place(relx=0.017, rely=0.578, height=28, width=92)
 	        self.Button1.configure(text='''Run Query''')
-            self.Button1["command"] = self.QUERY
+            	self.Button1["command"] = self.QUERY
 		
 
 #############
@@ -335,7 +372,7 @@ class InsertPage(tk.Frame):
             # Assign vairables to mysql statements and execute
             # Open MySQL connection
     	    self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
-	        self.cur = self.cnx.cursor()
+	    self.cur = self.cnx.cursor()
 	    
             # Body type query, has to go first due to Foreign key constraint
             self.query1 = ("""INSERT INTO body_type(platform_code, construction, shape, drive, suspension) VALUES(%s,%s,%s,%s,%s) """)
@@ -370,8 +407,8 @@ class InsertPage(tk.Frame):
             # Commit changes and close connection
             print("Insertion finished")
             self.cnx.commit()
-	        self.cur.close()
-	        self.cnx.close()
+	    self.cur.close()
+	    self.cnx.close()
             print("Commited!")
             
 	def __init__(self,parent,controller):
@@ -386,205 +423,206 @@ class InsertPage(tk.Frame):
 		label = tk.Label(self,text="Please fill out the form to insert a car into the database. No box may be left empty.")
 		label.pack()
 
-        ### Fields for Query ###
+		### Fields for Query ###
 
-        ## Car Table ##
-        # Make
-        self.make_label = tk.Label(self, text = "Make: ")
-        self.make_label.pack()
-        self.make_entry = tk.Entry(self)
-        self.make_entry.pack()
-                
-        # Model
-        self.model_label = tk.Label(self, text = "Model: ")
-        self.model_label.pack()
-        self.model_entry = tk.Entry(self)
-        self.model_entry.pack()
-        
-        # Price
-        self.price_label = tk.Label(self, text = "Price: ")
-        self.price_label.pack()
-        self.price_entry = tk.Entry(self)
-        self.price_entry.pack()
+		## Car Table ##
+		# Make
+		self.make_label = tk.Label(self, text = "Make: ")
+		self.make_label.pack()
+		self.make_entry = tk.Entry(self)
+		self.make_entry.pack()
+		        
+		# Model
+		self.model_label = tk.Label(self, text = "Model: ")
+		self.model_label.pack()
+		self.model_entry = tk.Entry(self)
+		self.model_entry.pack()
+		
+		# Price
+		self.price_label = tk.Label(self, text = "Price: ")
+		self.price_label.pack()
+		self.price_entry = tk.Entry(self)
+		self.price_entry.pack()
 
-        # Platform Code
-        self.platform_label = tk.Label(self, text = "Platform Code: ")
-        self.platform_label.pack()
-        self.platform_entry = tk.Entry(self)
-        self.platform_entry.pack()
+		# Platform Code
+		self.platform_label = tk.Label(self, text = "Platform Code: ")
+		self.platform_label.pack()
+		self.platform_entry = tk.Entry(self)
+		self.platform_entry.pack()
 
-                # Drive
-        self.drive_label = tk.Label(self, text = "Drive:")
-        self.drive_label.pack()
-        self.drive_entry = tk.Entry(self)
-        self.drive_entry.pack()
+		        # Drive
+		self.drive_label = tk.Label(self, text = "Drive:")
+		self.drive_label.pack()
+		self.drive_entry = tk.Entry(self)
+		self.drive_entry.pack()
 
-        # Aggregate Review %
-        self.aggrev_label = tk.Label(self, text = "Aggregate Review: (00.00)")
-        self.aggrev_label.pack()
-        self.aggrev_entry= tk.Entry(self)
-        self.aggrev_entry.pack()
+		# Aggregate Review %
+		self.aggrev_label = tk.Label(self, text = "Aggregate Review: (00.00)")
+		self.aggrev_label.pack()
+		self.aggrev_entry= tk.Entry(self)
+		self.aggrev_entry.pack()
 
-        # Autonomous
-        self.autonomous_label = tk.Label(self, text = "Autonomous? (1/0)")
-        self.autonomous_label.pack()
-        self.autonomous_entry = tk.Entry(self)
-        self.autonomous_entry.pack()
+		# Autonomous
+		self.autonomous_label = tk.Label(self, text = "Autonomous? (1/0)")
+		self.autonomous_label.pack()
+		self.autonomous_entry = tk.Entry(self)
+		self.autonomous_entry.pack()
 
-        ## Brand Table ##
-        # Brand Worth
-        self.worth_label = tk.Label(self, text = "Worth: (00.00)")
-        self.worth_label.pack()
-        self.worth_entry = tk.Entry(self)
-        self.worth_entry.pack()
-                        
-        # Public
-        self.public_label = tk.Label(self, text = "Public? (1/0)")
-        self.public_label.pack()
-        self.public_entry = tk.Entry(self)
-        self.public_entry.pack()
-        
-        ## Review Table ##
-        # Critic Score
-        self.critic_label = tk.Label(self, text = "Critic Score")
-        self.critic_label.pack()
-        self.critic_entry = tk.Entry(self)
-        self.critic_entry.pack()
+		## Brand Table ##
+		# Brand Worth
+		self.worth_label = tk.Label(self, text = "Worth: (00.00)")
+		self.worth_label.pack()
+		self.worth_entry = tk.Entry(self)
+		self.worth_entry.pack()
+		                
+		# Public
+		self.public_label = tk.Label(self, text = "Public? (1/0)")
+		self.public_label.pack()
+		self.public_entry = tk.Entry(self)
+		self.public_entry.pack()
+		
+		## Review Table ##
+		# Critic Score
+		self.critic_label = tk.Label(self, text = "Critic Score")
+		self.critic_label.pack()
+		self.critic_entry = tk.Entry(self)
+		self.critic_entry.pack()
 
-        # Customer Score
-        self.customer_label = tk.Label(self, text = "Customer score")
-        self.customer_label.pack()
-        self.customer_entry = tk.Entry(self)
-        self.customer_entry.pack()
+		# Customer Score
+		self.customer_label = tk.Label(self, text = "Customer score")
+		self.customer_label.pack()
+		self.customer_entry = tk.Entry(self)
+		self.customer_entry.pack()
 
-        ## Body Type ##
-        # Construction
-        self.construction_label = tk.Label(self, text = "Construction")
-        self.construction_label.pack()
-        self.construction_entry = tk.Entry(self)
-        self.construction_entry.pack()
+		## Body Type ##
+		# Construction
+		self.construction_label = tk.Label(self, text = "Construction")
+		self.construction_label.pack()
+		self.construction_entry = tk.Entry(self)
+		self.construction_entry.pack()
 
-        # Shape
-        self.shape_label = tk.Label(self, text = "Shape")
-        self.shape_label.pack()
-        self.shape_entry = tk.Entry(self)
-        self.shape_entry.pack()
+		# Shape
+		self.shape_label = tk.Label(self, text = "Shape")
+		self.shape_label.pack()
+		self.shape_entry = tk.Entry(self)
+		self.shape_entry.pack()
 
-        # Suspension
-        self.suspension_label = tk.Label(self, text = "Suspension")
-        self.suspension_label.pack()
-        self.suspension_entry = tk.Entry(self)
-        self.suspension_entry.pack()
+		# Suspension
+		self.suspension_label = tk.Label(self, text = "Suspension")
+		self.suspension_label.pack()
+		self.suspension_entry = tk.Entry(self)
+		self.suspension_entry.pack()
 
-        ## Tech ##
-        # Infotainment Name
-        self.infotainment_label = tk.Label(self, text = "Infotainment: (No spaces)")
-        self.infotainment_label.pack()
-        self.infotainment_entry = tk.Entry(self)
-        self.infotainment_entry.pack()
+		## Tech ##
+		# Infotainment Name
+		self.infotainment_label = tk.Label(self, text = "Infotainment: (No spaces)")
+		self.infotainment_label.pack()
+		self.infotainment_entry = tk.Entry(self)
+		self.infotainment_entry.pack()
 
-        # Proximity Sensor
-        self.proximity_label = tk.Label(self, text = "Proximity Sensor? (1/0)")
-        self.proximity_label.pack()
-        self.proximity_entry = tk.Entry(self)
-        self.proximity_entry.pack()
+		# Proximity Sensor
+		self.proximity_label = tk.Label(self, text = "Proximity Sensor? (1/0)")
+		self.proximity_label.pack()
+		self.proximity_entry = tk.Entry(self)
+		self.proximity_entry.pack()
 
-        # Automatic Braking
-        self.autobrake_label = tk.Label(self, text = "Automatic Braking? (1/0)")
-        self.autobrake_label.pack()
-        self.autobrake_entry = tk.Entry(self)
-        self.autobrake_entry.pack()
+		# Automatic Braking
+		self.autobrake_label = tk.Label(self, text = "Automatic Braking? (1/0)")
+		self.autobrake_label.pack()
+		self.autobrake_entry = tk.Entry(self)
+		self.autobrake_entry.pack()
 
-        # Adaptive Cruise Control
-        self.adc_label = tk.Label(self, text = "Adaptive Cruise? (1/0)")
-        self.adc_label.pack()
-        self.adc_entry = tk.Entry(self)
-        self.adc_entry.pack()
+		# Adaptive Cruise Control
+		self.adc_label = tk.Label(self, text = "Adaptive Cruise? (1/0)")
+		self.adc_label.pack()
+		self.adc_entry = tk.Entry(self)
+		self.adc_entry.pack()
 
-        ## Cost of Ownership
-        # Average Maintenance 
-        self.main_label = tk.Label(self, text = "Average Maintenance: ")
-        self.main_label.pack()
-        self.main_entry = tk.Entry(self)
-        self.main_entry.pack()
+		## Cost of Ownership
+		# Average Maintenance 
+		self.main_label = tk.Label(self, text = "Average Maintenance: ")
+		self.main_label.pack()
+		self.main_entry = tk.Entry(self)
+		self.main_entry.pack()
 
-        # Annual Depreciation
-        self.dep_lab = tk.Label(self, text = "Annual Depreciation: (00.00)")
-        self.dep_lab.pack()
-        self.dep_entry = tk.Entry(self)
-        self.dep_entry.pack()
+		# Annual Depreciation
+		self.dep_lab = tk.Label(self, text = "Annual Depreciation: (00.00)")
+		self.dep_lab.pack()
+		self.dep_entry = tk.Entry(self)
+		self.dep_entry.pack()
 
-        # Recalls
-        self.recalls_label = tk.Label(self, text = "Recalls: " )
-        self.recalls_label.pack()
-        self.recalls_entry = tk.Entry(self)
-        self.recalls_entry.pack()
+		# Recalls
+		self.recalls_label = tk.Label(self, text = "Recalls: " )
+		self.recalls_label.pack()
+		self.recalls_entry = tk.Entry(self)
+		self.recalls_entry.pack()
 
-        # Back button
+		# Back button
 		backbutton = tk.Button(self, text="Back",command = lambda: controller.show_frame(StartPage))
 		backbutton.pack(anchor = "sw", side = "left")
 
-        # Submit button
-        submit = tk.Button(self, text='Insert',command=self.INSERTION)
-        submit.pack(anchor = "sw", side = "right")
+		# Submit button
+		submit = tk.Button(self, text='Insert',command=self.INSERTION)
+		submit.pack(anchor = "sw", side = "right")
 	
 
 #############		
 #Remove Page#
 #############
-    def DELETE(self):
-        print("Start")
+class RemovePage(tk.Frame):
+	def DELETE(self):
+		print("Start")
         
-        # Assign input to variable
-        self.model = self.Entry1.get()
-        self.platform = self.Entry2.get()
-        
-        # Print Variables for testing
-        print self.model
-        print self.platform
+		# Assign input to variable
+		self.model = self.Entry1.get()
+		self.platform = self.Entry2.get()
+		
+		# Print Variables for testing
+		print self.model
+		print self.platform
 
-        # Create queries to remove items
-        # Connect to MySQL database
-        self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
-	       self.cur = self.cnx.cursor()
+		# Create queries to remove items
+		# Connect to MySQL database
+		self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
+		self.cur = self.cnx.cursor()
 
-        # Create MySQL commands
-	    # REMOVAL ORDER tech -> cow -> review -> car -> body_type
-        # Remove from Tech table
-        #self.removal1 = ("""DELETE FROM tech WHERE model=%s""")
-        self.removal1 = "DELETE FROM tech WHERE model=%s"
-        #self.data_value1 = (self.model)
-        self.cur.execute(self.removal1,(self.model,))
-        print("Deleted from Tech table")
+		# Create MySQL commands
+		    # REMOVAL ORDER tech -> cow -> review -> car -> body_type
+		# Remove from Tech table
+		#self.removal1 = ("""DELETE FROM tech WHERE model=%s""")
+		self.removal1 = "DELETE FROM tech WHERE model=%s"
+		#self.data_value1 = (self.model)
+		self.cur.execute(self.removal1,(self.model,))
+		print("Deleted from Tech table")
 
-        # Remove from Cost of Ownership table
-        self.removal2 = "DELETE FROM costofownership WHERE model=%s"
-        self.cur.execute(self.removal2,(self.model,))
-        print("Deleted from Cost of Ownership table")
+		# Remove from Cost of Ownership table
+		self.removal2 = "DELETE FROM costofownership WHERE model=%s"
+		self.cur.execute(self.removal2,(self.model,))
+		print("Deleted from Cost of Ownership table")
 
-        # Remove from Review table
-        self.removal3 = "DELETE FROM review WHERE model=%s"
-        self.cur.execute(self.removal3,(self.model,))
-        print("Deleted from Review table")
-            
-        # Remove from car table
-        self.removal4 = "DELETE FROM car WHERE model=%s"
-        self.cur.execute(self.removal4,(self.model,))
-        print("Deleted from Car table")
-            
-        # Remove from Body type table
-        self.removal5 = "DELETE FROM body_type WHERE platform_code=%s"
-        self.cur.execute(self.removal5,(self.model,))
-        print("Deleted from Body Type table")
+		# Remove from Review table
+		self.removal3 = "DELETE FROM review WHERE model=%s"
+		self.cur.execute(self.removal3,(self.model,))
+		print("Deleted from Review table")
+		    
+		# Remove from car table
+		self.removal4 = "DELETE FROM car WHERE model=%s"
+		self.cur.execute(self.removal4,(self.model,))
+		print("Deleted from Car table")
+		    
+		# Remove from Body type table
+		self.removal5 = "DELETE FROM body_type WHERE platform_code=%s"
+		self.cur.execute(self.removal5,(self.model,))
+		print("Deleted from Body Type table")
 
-        # Commit changes and close connection
-        print("Deletion finished")
-        self.cnx.commit()
-	    self.cur.close()
-	    self.cnx.close()
-        print("Commited!")
+		# Commit changes and close connection
+		print("Deletion finished")
+		self.cnx.commit()
+		self.cur.close()
+		self.cnx.close()
+		print("Commited!")
 
-    def __init__(self,parent,controller):
+	def __init__(self,parent,controller):
 		tk.Frame.__init__(self,parent)
 		_bgcolor = '#d9d9d9'  # X11 color: 'gray85'
 		_fgcolor = '#000000'  # X11 color: 'black'
@@ -598,44 +636,114 @@ class InsertPage(tk.Frame):
 		backbutton = tk.Button(self, text="Back",command = lambda: controller.show_frame(StartPage))
 		backbutton.pack(anchor = "sw", side = "left")
 
-        #begin REMOVAL form code
+		#begin REMOVAL form code
 		
-        self.Label1 = tk.Label(self)
-       	self.Label1.place(relx=0.1, rely=0.089, height=18, width=100)
-        self.Label1.configure(activebackground="#f9f9f9")
-        self.Label1.configure(text='''Car Model''')
+		self.Label1 = tk.Label(self)
+	       	self.Label1.place(relx=0.1, rely=0.089, height=18, width=100)
+		self.Label1.configure(activebackground="#f9f9f9")
+		self.Label1.configure(text='''Car Model''')
 
-        self.Label2 = tk.Label(self)
-        self.Label2.place(relx=0.1, rely=0.311, height=18, width=150)
-        self.Label2.configure(activebackground="#f9f9f9")
-        self.Label2.configure(text='''Platform Code''')
+		self.Label2 = tk.Label(self)
+		self.Label2.place(relx=0.1, rely=0.311, height=18, width=150)
+		self.Label2.configure(activebackground="#f9f9f9")
+		self.Label2.configure(text='''Platform Code''')
 
-        ### SELECT FROM ###
-        # Select input box
-	    self.Entry1 = tk.Entry(self)
-	    self.Entry1.place(relx=0.350, rely=0.089,height=20, relwidth=0.243)
-	    self.Entry1.configure(background="white")
-	    self.Entry1.configure(font="TkFixedFont")
-	    self.Entry1.configure(selectbackground="#c4c4c4")
+		### SELECT FROM ###
+		# Select input box
+		self.Entry1 = tk.Entry(self)
+		self.Entry1.place(relx=0.350, rely=0.089,height=20, relwidth=0.243)
+		self.Entry1.configure(background="white")
+		self.Entry1.configure(font="TkFixedFont")
+		self.Entry1.configure(selectbackground="#c4c4c4")
 
-	    ###  WHERE STATEMENT ###
-	    # WHERE input box1
-	    self.Entry2 = tk.Entry(self)
-	    self.Entry2.place(relx=0.350, rely=0.311,height=20, relwidth=0.243)
-	    self.Entry2.configure(background="white")
-	    self.Entry2.configure(font="TkFixedFont")
-	    self.Entry2.configure(selectbackground="#c4c4c4")
-	       
-        # Run Deletion Function Button
-	    self.Button1 = tk.Button(self)
-	    self.Button1.place(relx=0.017, rely=0.578, height=28, width=92)
-	    self.Button1.configure(text='''Remove Entry''')
-        self.Button1["command"] = self.DELETE
+		###  WHERE STATEMENT ###
+		# WHERE input box1
+		self.Entry2 = tk.Entry(self)
+		self.Entry2.place(relx=0.350, rely=0.311,height=20, relwidth=0.243)
+		self.Entry2.configure(background="white")
+		self.Entry2.configure(font="TkFixedFont")
+		self.Entry2.configure(selectbackground="#c4c4c4")
+		       
+		# Run Deletion Function Button
+		self.Button1 = tk.Button(self)
+		self.Button1.place(relx=0.017, rely=0.578, height=28, width=92)
+		self.Button1.configure(text='''Remove Entry''')
+		self.Button1["command"] = self.DELETE
 
 ###################		
 #Export Query Page#
 ###################
 class QEPage(tk.Frame):
+	def EXPORT(self):
+		# Assign vairables to mysql statements and execute
+		   # Open MySQL connection
+		self.cnx = mysql.connector.connect(user='george', password='LabPass123', database='CS421',host='localhost')
+		self.cur = self.cnx.cursor()
+		# Create simple query that doesn't use WHERE clause
+		if self.WHEREB == 0:
+			self.query1 = ("SELECT {} FROM {} INTO OUTFILE '/home/george/421/ProjectExports/DBoutput.txt';".format(self.VALUE,self.TABLE))
+			print self.query1
+            		self.cur.execute(self.query1)
+			print "Simple Query"	
+
+		# Create complicated query that uses WHERE clause
+		if self.WHEREB == 1:
+			self.query1 = ("SELECT {} FROM {} WHERE {} {} {} INTO OUTFILE '/home/george/421/ProjectExports/DBoutput.txt';".format(self.VALUE,self.TABLE,self.WHERE,self.WHEREV,self.WHERE2))
+			#self.command=("""SELECT * FROM review INTO OUTFILE '/home/oddone9139/ProjectExports/DBoutput.csv';""")
+			self.cur.execute(self.query1)
+			
+		
+	def QUERY(self):
+		print "Function Called"
+            
+		# Assign entry box values to variables
+            	self.VALUE = self.Entry1.get()
+            	self.TABLE = self.Entry2.get()
+            	self.WHERE = self.Entry3.get()
+		self.WHERE2 = self.Entry4.get()
+            	self.WHEREB = self.CheckVar2.get()
+            	self.WHEREV = self.TCombobox1.get()
+
+            	# Output for testing, remove before submission
+            	print self.VALUE 
+            	print self.TABLE
+            	print self.WHERE
+		print self.WHERE2
+            	print self.WHEREB
+            	print self.WHEREV
+		#reset text to empty in case this is a subsequent call of QUERY
+		self.Scrolledtext1.delete(1.0,"end")
+	# Assign vairables to mysql statements and execute
+		   # Open MySQL connection
+		self.cnx = mysql.connector.connect(user='george', password='LabPass123', database='CS421',host='localhost')
+		self.cur = self.cnx.cursor()
+		# Create simple query that doesn't use WHERE clause
+		if self.WHEREB == 0:
+			self.query1 = ("SELECT {} FROM {}".format(self.VALUE,self.TABLE))
+			print self.query1
+            		self.cur.execute(self.query1)
+			print "Simple Query"
+			#loop that outputs query into text box
+			for row in self.cur.fetchall():
+				self.Scrolledtext1.insert("end", row)
+				self.Scrolledtext1.update_idletasks()
+				self.Scrolledtext1.insert("end", '\n')
+				self.Scrolledtext1.update_idletasks()	
+
+		# Create complicated query that uses WHERE clause
+		if self.WHEREB == 1:
+			self.query1 = ("SELECT {} FROM {} WHERE {} {} {}".format(self.VALUE,self.TABLE,self.WHERE,self.WHEREV,self.WHERE2))
+			print self.query1
+			self.cur.execute(self.query1)
+			print "Complicated Query"
+			#loop that outputs query into text box
+			for row in self.cur.fetchall():
+				self.Scrolledtext1.insert("end", row)
+				self.Scrolledtext1.update_idletasks()
+				self.Scrolledtext1.insert("end", '\n')
+				self.Scrolledtext1.update_idletasks()
+
+
 	def __init__(self,parent,controller):
 		tk.Frame.__init__(self,parent)
 		_bgcolor = '#d9d9d9'  # X11 color: 'gray85'
@@ -694,8 +802,8 @@ class QEPage(tk.Frame):
 	    # Option checkbox for WHERE clause
 	        self.CheckVar2 = tk.IntVar()
 	        self.RadioWHERE = tk.Checkbutton(self, variable = self.CheckVar2, onvalue = 1, offvalue = 0)
-	        self.RadioWHERE.place(relx=0.017, rely=0.311, relheight=0.044
-                , relwidth=0.132)
+	        self.RadioWHERE.place(relx=0.017, rely=0.302, relheight=0.044
+                , relwidth=0.145)
 	        self.RadioWHERE.configure(activebackground="#f9f9f9")
 	        self.RadioWHERE.configure(justify='left')
 	        self.RadioWHERE.configure(text='''WHERE?''')
@@ -707,27 +815,26 @@ class QEPage(tk.Frame):
 	        self.TCombobox1.configure(values=self.value_list)
 	        self.TCombobox1.configure(takefocus="")
 	# Query OutPut box
-	        #self.Scrolledtext1 = tk.scrolledtext.ScrolledText(self)
-	        #self.Scrolledtext1.place(relx=0.0, rely=0.667, relheight=0.262
-                #, relwidth=0.98)
-	        #self.Scrolledtext1.configure(background="white")
-	        #self.Scrolledtext1.configure(font="TkTextFont")
-	        #self.Scrolledtext1.configure(insertborderwidth="3")
-	        #self.Scrolledtext1.configure(selectbackground="#c4c4c4")
-	        #self.Scrolledtext1.configure(width=10)
-	        #self.Scrolledtext1.configure(wrap="none")
+	        self.Scrolledtext1 = scrolledtext.ScrolledText(self)
+	        self.Scrolledtext1.place(relx=0.0, rely=0.667, relheight=0.262
+                , relwidth=0.98)
+	        self.Scrolledtext1.configure(background="white")
+	        self.Scrolledtext1.configure(font="TkTextFont")
+	        self.Scrolledtext1.configure(insertborderwidth="3")
+	        self.Scrolledtext1.configure(selectbackground="#c4c4c4")
+	        self.Scrolledtext1.configure(width=10)
+	        self.Scrolledtext1.configure(wrap="none")
 	# Export button
 	        self.ExportQuery = tk.Button(self)
 	        self.ExportQuery.place(relx=0.35, rely=0.933, height=28, width=149)
 	        self.ExportQuery.configure(activebackground="#f9f9f9")
 	        self.ExportQuery.configure(text='''Export''')
+		self.ExportQuery['command'] = self.EXPORT
 	# Run Query button
 	        self.Button1 = tk.Button(self)
 	        self.Button1.place(relx=0.017, rely=0.578, height=28, width=92)
 	        self.Button1.configure(text='''Run Query''')
-        # Submit button
-        submit = tk.Button(self, text='Insert',command=self.INSERTION)
-        submit.pack(anchor = "sw", side = "right")
+		self.Button1['command'] = self.QUERY
 
 
 ###################		
