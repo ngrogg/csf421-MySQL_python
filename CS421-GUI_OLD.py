@@ -67,7 +67,7 @@ class Application(Frame):
     # Export brand
     def BRAND(self):
         # Open MySQL connection
-        self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
+        self.cnx = mysql.connector.connect(user='', password='', database='CS421',host='localhost')
         self.cur = self.cnx.cursor()
         self.command=("""SELECT * FROM brand INTO OUTFILE '/home/oddone9139/ProjectExports/brand.csv';""")
         self.cur.execute(self.command)
@@ -78,7 +78,7 @@ class Application(Frame):
     # Export car
     def CAR(self):
         # Open MySQL connection
-        self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
+        self.cnx = mysql.connector.connect(user='', password='', database='CS421',host='localhost')
         self.cur = self.cnx.cursor()
         self.command=("""SELECT * FROM car INTO OUTFILE '/home/oddone9139/ProjectExports/car.csv';""")
         self.cur.execute(self.command)
@@ -89,7 +89,7 @@ class Application(Frame):
     # Export costofownership
     def COSTOFOWNERSHIP(self):
         # Open MySQL connection
-        self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
+        self.cnx = mysql.connector.connect(user='', password='', database='CS421',host='localhost')
         self.cur = self.cnx.cursor()
         self.command=("""SELECT * FROM costofownership INTO OUTFILE '/home/oddone9139/ProjectExports/cow.csv';""")
         self.cur.execute(self.command)
@@ -100,7 +100,7 @@ class Application(Frame):
     # Export engine
     def ENGINE(self):
         # Open MySQL connection
-        self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
+        self.cnx = mysql.connector.connect(user='', password='', database='CS421',host='localhost')
         self.cur = self.cnx.cursor()
         self.command=("""SELECT * FROM engine INTO OUTFILE '/home/oddone9139/ProjectExports/engine.csv';""")
         self.cur.execute(self.command)
@@ -111,7 +111,7 @@ class Application(Frame):
     # Export jointproject
     def JOINTPROJECT(self):
         # Open MySQL connection
-        self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
+        self.cnx = mysql.connector.connect(user='', password='', database='CS421',host='localhost')
         self.cur = self.cnx.cursor()
         self.command=("""SELECT * FROM jointproject INTO OUTFILE '/home/oddone9139/ProjectExports/jointproject.csv';""")
         self.cur.execute(self.command)
@@ -122,7 +122,7 @@ class Application(Frame):
     # Export review
     def REVIEW(self):
          # Open MySQL connection
-        self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
+        self.cnx = mysql.connector.connect(user='', password='', database='CS421',host='localhost')
         self.cur = self.cnx.cursor()
         self.command=("""SELECT * FROM review INTO OUTFILE '/home/oddone9139/ProjectExports/review.csv';""")
         self.cur.execute(self.command)
@@ -133,7 +133,7 @@ class Application(Frame):
     # Export tech
     def TECH(self):
          # Open MySQL connection
-        self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
+        self.cnx = mysql.connector.connect(user='', password='', database='CS421',host='localhost')
         self.cur = self.cnx.cursor()
         self.command=("""SELECT * FROM tech INTO OUTFILE '/home/oddone9139/ProjectExports/tech.csv';""")
         self.cur.execute(self.command)
@@ -144,7 +144,7 @@ class Application(Frame):
     # Export usesengine
     def USESENGINE(self):
         # Open MySQL connection
-        self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
+        self.cnx = mysql.connector.connect(user='', password='', database='CS421',host='localhost')
         self.cur = self.cnx.cursor()
         self.command=("""SELECT * FROM usesengine INTO OUTFILE '/home/oddone9139/ProjectExports/usesengine.csv';""")
         self.cur.execute(self.command)
