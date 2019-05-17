@@ -202,7 +202,7 @@ class QueryPage(tk.Frame):
 		self.Scrolledtext2.delete(1.0,"end")
 	# Assign vairables to mysql statements and execute
 		   # Open MySQL connection
-		self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
+		self.cnx = mysql.connector.connect(user='', password='', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
 		# Create simple query that doesn't use WHERE clause
 		if self.WHEREB == 0:
@@ -371,7 +371,7 @@ class InsertPage(tk.Frame):
 
             # Assign vairables to mysql statements and execute
             # Open MySQL connection
-    	    self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
+    	    self.cnx = mysql.connector.connect(user='', password='', database='CS421',host='localhost')
 	    self.cur = self.cnx.cursor()
 	    
             # Body type query, has to go first due to Foreign key constraint
@@ -583,7 +583,7 @@ class RemovePage(tk.Frame):
 
 		# Create queries to remove items
 		# Connect to MySQL database
-		self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
+		self.cnx = mysql.connector.connect(user='', password='', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
 
 		# Create MySQL commands
@@ -677,7 +677,7 @@ class QEPage(tk.Frame):
 	def EXPORT(self):
 		# Assign vairables to mysql statements and execute
 		   # Open MySQL connection
-		self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
+		self.cnx = mysql.connector.connect(user='', password='', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
 		# Create simple query that doesn't use WHERE clause
 		if self.WHEREB == 0:
@@ -715,7 +715,7 @@ class QEPage(tk.Frame):
 		self.Scrolledtext1.delete(1.0,"end")
 	# Assign vairables to mysql statements and execute
 		   # Open MySQL connection
-		self.cnx = mysql.connector.connect(user='Oddone9139', password='Mast0don!', database='CS421',host='localhost')
+		self.cnx = mysql.connector.connect(user='', password='', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
 		# Create simple query that doesn't use WHERE clause
 		if self.WHEREB == 0:
