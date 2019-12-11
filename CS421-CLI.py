@@ -139,7 +139,7 @@ elif Table == 'UE':
 
 # Fail state for invalid options
 else:
-    print "Invalid parameter"
+    print("Invalid parameter")
 
 # Close MySQL connection
 cur.close()

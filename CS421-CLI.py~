@@ -1,7 +1,7 @@
-#!/usr/bin/python2.7
+#!/usr/bin/python3
 
 import argparse
-import mysql.connector
+import mysql-connector
 
 '''
 If repurposing, the only changes that need to be made are to the
@@ -139,7 +139,7 @@ elif Table == 'UE':
 
 # Fail state for invalid options
 else:
-    print "Invalid parameter"
+    print("Invalid parameter")
 
 # Close MySQL connection
 cur.close()
