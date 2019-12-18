@@ -6,8 +6,6 @@ import ttk
 import tkMessageBox
 import mysql.connector
 
-
-
 #each class is a page in this set up
 #mainapp creates the initialization of the app's baseline
 #the for loop  holds a list that holds the names of all of the
@@ -41,22 +39,21 @@ class mainapp(tk.Tk):
 ## EXPORT TABLE FUNCTIONS ##
 ############################
 	# Export bodytype
-    	def BODYTYPE(self):
-		# Open MySQL connection
-		self.cnx = mysql.connector.connect(user='', password='Mast0don!', database='CS421',host='localhost')
-		self.cur = self.cnx.cursor()
-		self.command=("""SELECT * FROM body_type INTO OUTFILE '/home/oddone9139/ProjectExports/bodytype.csv';""")			
-		print self.command
-            	self.cur.execute
-		self.cur.execute(self.command)
-		self.cnx.commit()
-		self.cur.close()
-		self.cnx.close()
+        def BODYTYPE(self):
+            # Open MySQL connection
+            self.cnx = mysql.connector.connect(user='testuser', password='testPassword!', database='CS421',host='localhost')
+            self.cur = self.cnx.cursor()
+            self.command=("""SELECT * FROM body_type INTO OUTFILE '/home/oddone9139/ProjectExports/bodytype.csv';""")			
+            self.cur.execute
+            self.cur.execute(self.command)
+            self.cnx.commit()
+            self.cur.close()
+            self.cnx.close()
 		   
 	# Export brand
 	def BRAND(self):
 		# Open MySQL connection
-		self.cnx = mysql.connector.connect(user='', password='', database='CS421',host='localhost')
+		self.cnx = mysql.connector.connect(user='testuser', password='testPassword!', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
 		self.command=("""SELECT * FROM brand INTO OUTFILE '/home/oddone9139/ProjectExports/brand.csv';""")
 		self.cur.execute(self.command)
@@ -67,7 +64,7 @@ class mainapp(tk.Tk):
     	# Export car
   	def CAR(self):
 		# Open MySQL connection
-		self.cnx = mysql.connector.connect(user='', password='', database='CS421',host='localhost')
+		self.cnx = mysql.connector.connect(user='testuser', password='testPassword!', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
 		self.command=("""SELECT * FROM car INTO OUTFILE '/home/oddone9139/ProjectExports/car.csv';""")
 		self.cur.execute(self.command)
@@ -78,7 +75,7 @@ class mainapp(tk.Tk):
     	# Export costofownership
     	def COSTOFOWNERSHIP(self):
 		# Open MySQL connection
-		self.cnx = mysql.connector.connect(user='', password='', database='CS421',host='localhost')
+		self.cnx = mysql.connector.connect(user='testuser', password='testPassword!', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
 		self.command=("""SELECT * FROM costofownership INTO OUTFILE '/home/oddone9139/ProjectExports/cow.csv';""")
 		self.cur.execute(self.command)
@@ -89,7 +86,7 @@ class mainapp(tk.Tk):
    	 # Export engine
    	def ENGINE(self):
 		# Open MySQL connection
-		self.cnx = mysql.connector.connect(user='', password='', database='CS421',host='localhost')
+		self.cnx = mysql.connector.connect(user='testuser', password='testPassword!', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
 		self.command=("""SELECT * FROM engine INTO OUTFILE '/home/oddone9139/ProjectExports/engine.csv';""")
 		self.cur.execute(self.command)
@@ -100,7 +97,7 @@ class mainapp(tk.Tk):
 	# Export jointproject
     	def JOINTPROJECT(self):
 		# Open MySQL connection
-		self.cnx = mysql.connector.connect(user='', password='', database='CS421',host='localhost')
+		self.cnx = mysql.connector.connect(user='testuser', password='testPassword!', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
 		self.command=("""SELECT * FROM jointproject INTO OUTFILE '/home/oddone9139/ProjectExports/jointproject.csv';""")
 		self.cur.execute(self.command)
@@ -111,7 +108,7 @@ class mainapp(tk.Tk):
    	 # Export review
     	def REVIEW(self):
 		 # Open MySQL connection
-		self.cnx = mysql.connector.connect(user='', password='', database='CS421',host='localhost')
+		self.cnx = mysql.connector.connect(user='testuser', password='testPassword!', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
 		self.command=("""SELECT * FROM review INTO OUTFILE '/home/oddone9139/ProjectExports/review.csv';""")
 		self.cur.execute(self.command)
@@ -122,7 +119,7 @@ class mainapp(tk.Tk):
     	# Export tech
     	def TECH(self):
 		 # Open MySQL connection
-		self.cnx = mysql.connector.connect(user='', password='', database='CS421',host='localhost')
+		self.cnx = mysql.connector.connect(user='testuser', password='testPassword!', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
 		self.command=("""SELECT * FROM tech INTO OUTFILE '/home/oddone9139/ProjectExports/tech.csv';""")
 		self.cur.execute(self.command)
@@ -133,7 +130,7 @@ class mainapp(tk.Tk):
    	 # Export usesengine
     	def USESENGINE(self):
 		# Open MySQL connection
-		self.cnx = mysql.connector.connect(user='', password='', database='CS421',host='localhost')
+		self.cnx = mysql.connector.connect(user='testuser', password='testPassword!', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
 		self.command=("""SELECT * FROM usesengine INTO OUTFILE '/home/oddone9139/ProjectExports/usesengine.csv';""")
 		self.cur.execute(self.command)
@@ -203,7 +200,7 @@ class QueryPage(tk.Frame):
 		self.Scrolledtext2.delete(1.0,"end")
 	# Assign vairables to mysql statements and execute
 		   # Open MySQL connection
-		self.cnx = mysql.connector.connect(user='', password='', database='CS421',host='localhost')
+		self.cnx = mysql.connector.connect(user='testuser', password='testPassword!', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
 		# Create simple query that doesn't use WHERE clause
 		if self.WHEREB == 0:
@@ -372,7 +369,7 @@ class InsertPage(tk.Frame):
 
             # Assign vairables to mysql statements and execute
             # Open MySQL connection
-    	    self.cnx = mysql.connector.connect(user='', password='', database='CS421',host='localhost')
+    	    self.cnx = mysql.connector.connect(user='testuser', password='testPassword!', database='CS421',host='localhost')
 	    self.cur = self.cnx.cursor()
 	    
             # Body type query, has to go first due to Foreign key constraint
@@ -584,7 +581,7 @@ class RemovePage(tk.Frame):
 
 		# Create queries to remove items
 		# Connect to MySQL database
-		self.cnx = mysql.connector.connect(user='', password='', database='CS421',host='localhost')
+		self.cnx = mysql.connector.connect(user='testuser', password='testPassword!', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
 
 		# Create MySQL commands
@@ -678,7 +675,7 @@ class QEPage(tk.Frame):
 	def EXPORT(self):
 		# Assign vairables to mysql statements and execute
 		   # Open MySQL connection
-		self.cnx = mysql.connector.connect(user='', password='', database='CS421',host='localhost')
+		self.cnx = mysql.connector.connect(user='testuser', password='testPassword!', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
 		# Create simple query that doesn't use WHERE clause
 		if self.WHEREB == 0:
@@ -716,7 +713,7 @@ class QEPage(tk.Frame):
 		self.Scrolledtext1.delete(1.0,"end")
 	# Assign vairables to mysql statements and execute
 		   # Open MySQL connection
-		self.cnx = mysql.connector.connect(user='', password='', database='CS421',host='localhost')
+		self.cnx = mysql.connector.connect(user='testuser', password='testPassword!', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
 		# Create simple query that doesn't use WHERE clause
 		if self.WHEREB == 0:
