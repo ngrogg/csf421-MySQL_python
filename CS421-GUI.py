@@ -38,12 +38,12 @@ class mainapp(tk.Tk):
 ############################
 ## EXPORT TABLE FUNCTIONS ##
 ############################
-	# Export bodytype
+        # Export bodytype
         def BODYTYPE(self):
             # Open MySQL connection
             self.cnx = mysql.connector.connect(user='testuser', password='testPassword!', database='CS421',host='localhost')
             self.cur = self.cnx.cursor()
-            self.command=("""SELECT * FROM body_type INTO OUTFILE '/home/oddone9139/ProjectExports/bodytype.csv';""")			
+            self.command=("""SELECT * FROM body_type INTO OUTFILE '/home/username/ProjectExports/bodytype.csv';""")			
             self.cur.execute
             self.cur.execute(self.command)
             self.cnx.commit()
@@ -55,7 +55,7 @@ class mainapp(tk.Tk):
 		# Open MySQL connection
 		self.cnx = mysql.connector.connect(user='testuser', password='testPassword!', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
-		self.command=("""SELECT * FROM brand INTO OUTFILE '/home/oddone9139/ProjectExports/brand.csv';""")
+		self.command=("""SELECT * FROM brand INTO OUTFILE '/home/username/ProjectExports/brand.csv';""")
 		self.cur.execute(self.command)
 		self.cnx.commit()
 		self.cur.close()
@@ -66,7 +66,7 @@ class mainapp(tk.Tk):
 		# Open MySQL connection
 		self.cnx = mysql.connector.connect(user='testuser', password='testPassword!', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
-		self.command=("""SELECT * FROM car INTO OUTFILE '/home/oddone9139/ProjectExports/car.csv';""")
+		self.command=("""SELECT * FROM car INTO OUTFILE '/home/username/ProjectExports/car.csv';""")
 		self.cur.execute(self.command)
 		self.cnx.commit()
 		self.cur.close()
@@ -77,7 +77,7 @@ class mainapp(tk.Tk):
 		# Open MySQL connection
 		self.cnx = mysql.connector.connect(user='testuser', password='testPassword!', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
-		self.command=("""SELECT * FROM costofownership INTO OUTFILE '/home/oddone9139/ProjectExports/cow.csv';""")
+		self.command=("""SELECT * FROM costofownership INTO OUTFILE '/home/username/ProjectExports/cow.csv';""")
 		self.cur.execute(self.command)
 		self.cnx.commit()
 		self.cur.close()
@@ -88,7 +88,7 @@ class mainapp(tk.Tk):
 		# Open MySQL connection
 		self.cnx = mysql.connector.connect(user='testuser', password='testPassword!', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
-		self.command=("""SELECT * FROM engine INTO OUTFILE '/home/oddone9139/ProjectExports/engine.csv';""")
+		self.command=("""SELECT * FROM engine INTO OUTFILE '/home/username/ProjectExports/engine.csv';""")
 		self.cur.execute(self.command)
 		self.cnx.commit()
 		self.cur.close()
@@ -99,7 +99,7 @@ class mainapp(tk.Tk):
 		# Open MySQL connection
 		self.cnx = mysql.connector.connect(user='testuser', password='testPassword!', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
-		self.command=("""SELECT * FROM jointproject INTO OUTFILE '/home/oddone9139/ProjectExports/jointproject.csv';""")
+		self.command=("""SELECT * FROM jointproject INTO OUTFILE '/home/username/ProjectExports/jointproject.csv';""")
 		self.cur.execute(self.command)
 		self.cnx.commit()
 		self.cur.close()
@@ -110,7 +110,7 @@ class mainapp(tk.Tk):
 		 # Open MySQL connection
 		self.cnx = mysql.connector.connect(user='testuser', password='testPassword!', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
-		self.command=("""SELECT * FROM review INTO OUTFILE '/home/oddone9139/ProjectExports/review.csv';""")
+		self.command=("""SELECT * FROM review INTO OUTFILE '/home/username/ProjectExports/review.csv';""")
 		self.cur.execute(self.command)
 		self.cnx.commit()
 		self.cur.close()
@@ -121,7 +121,7 @@ class mainapp(tk.Tk):
 		 # Open MySQL connection
 		self.cnx = mysql.connector.connect(user='testuser', password='testPassword!', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
-		self.command=("""SELECT * FROM tech INTO OUTFILE '/home/oddone9139/ProjectExports/tech.csv';""")
+		self.command=("""SELECT * FROM tech INTO OUTFILE '/home/username/ProjectExports/tech.csv';""")
 		self.cur.execute(self.command)
 		self.cnx.commit()
 		self.cur.close()
@@ -132,7 +132,7 @@ class mainapp(tk.Tk):
 		# Open MySQL connection
 		self.cnx = mysql.connector.connect(user='testuser', password='testPassword!', database='CS421',host='localhost')
 		self.cur = self.cnx.cursor()
-		self.command=("""SELECT * FROM usesengine INTO OUTFILE '/home/oddone9139/ProjectExports/usesengine.csv';""")
+		self.command=("""SELECT * FROM usesengine INTO OUTFILE '/home/username/ProjectExports/usesengine.csv';""")
 		self.cur.execute(self.command)
 		self.cnx.commit()
 		self.cur.close()
@@ -679,15 +679,15 @@ class QEPage(tk.Frame):
 		self.cur = self.cnx.cursor()
 		# Create simple query that doesn't use WHERE clause
 		if self.WHEREB == 0:
-			self.query1 = ("SELECT {} FROM {} INTO OUTFILE '/home/oddone9139/ProjectExports/QueryExport.csv';".format(self.VALUE,self.TABLE))
+			self.query1 = ("SELECT {} FROM {} INTO OUTFILE '/home/username/ProjectExports/QueryExport.csv';".format(self.VALUE,self.TABLE))
 			print self.query1
             		self.cur.execute(self.query1)
 			print "Simple Query"	
 
 		# Create complicated query that uses WHERE clause
 		if self.WHEREB == 1:
-			self.query1 = ("SELECT {} FROM {} WHERE {} {} {} INTO OUTFILE '/home/oddone9139/ProjectExports/QueryExport.csv';".format(self.VALUE,self.TABLE,self.WHERE,self.WHEREV,self.WHERE2))
-			#self.command=("""SELECT * FROM review INTO OUTFILE '/home/oddone9139/ProjectExports/DBoutput.csv';""")
+			self.query1 = ("SELECT {} FROM {} WHERE {} {} {} INTO OUTFILE '/home/username/ProjectExports/QueryExport.csv';".format(self.VALUE,self.TABLE,self.WHERE,self.WHEREV,self.WHERE2))
+			#self.command=("""SELECT * FROM review INTO OUTFILE '/home/username/ProjectExports/DBoutput.csv';""")
 			self.cur.execute(self.query1)
 			
 		
