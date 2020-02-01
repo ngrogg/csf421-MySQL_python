@@ -10,3 +10,4 @@ A Join mechanic similar to the Where line in the Query sections <br>
 
 ## ISSUES
 Iterator needed for Export file names in GUI <br>
+Formatting could be more visually appealing <br>
